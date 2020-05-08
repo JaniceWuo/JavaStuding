@@ -217,6 +217,10 @@ Servlet相关配置：
 
 ​                            给服务器使用，比如转发路径  不需要加虚拟目录
 
+
+
+##### 服务器输出字符数据到浏览器，要注意乱码问题，用`response.setContentType("text/html;charset=utf-8");`
+
 ​                                         
 
 ​               
