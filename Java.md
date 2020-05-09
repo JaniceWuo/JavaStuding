@@ -227,7 +227,7 @@ Servlet相关配置：
 
 ### 5.9  ​ ​ :blue_heart::accept:
 
-##### ServletContext对象  
+#### ServletContext对象  
 
 ​        代表整个web应用，可以和程序的容器（服务器）来通信。
 
@@ -255,7 +255,7 @@ Servlet相关配置：
 
 ​          项目位于`day15_response/src/cn.itcast.web/download/DownloadServlet.java`
 
-##### 会话技术
+#### 会话技术
 
 ##### 会话：一次会话包含多次请求和响应。
 
@@ -265,13 +265,27 @@ Servlet相关配置：
 
 会话的方式：客户端会话数据：cookie       服务器会话数据：session
 
+Cookie的特点和作用：
+
+特点： Cookie存储数据在客户端浏览器
+
+​             对于单个Cookie存储大小有限制
+
+作用：一般用于存储少量的不太敏感的数据
+
+​            在不登录的情况下完成服务器对客户端身份的识别
+
+###### 案例：记住上一次访问时间——是否第一次访问Servlet
+
+​           位于day16_cookie&session下的CookieTest.java
 
 
 
+#### JSP入门 ​ ​ :hugs:
 
+概念：java server pages:java服务器端页面
 
-
-
+​            可以理解为一个特殊的页面，既可以定义html标签，又可以定义java代码
 
 
 
