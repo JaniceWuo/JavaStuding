@@ -329,15 +329,55 @@ Servlet相关配置：
 
 #### JSP:
 
-​        指令  ：用于配置JSP页面，导入资源文件 <%@>
+​        指令  ：用于配置JSP页面，导入资源文件 <%@ %>
 
-​        注释
+​                  page :配置jsp页面  include:导入页面的资源文件   taglib:导入资源
 
-​       内置对象
+​        注释: <!-- -->只可以注释html    <%-- --%>可以注释所有
+
+​        内置对象：在jsp页面中不需要创建可以直接使用的对象
+
+​                           共9个
+
+#### MVC开发模式
+
+如果过度使用jsp，在jsp中写大量java代码和html表，造成难于维护，难于分工。
+
+后来java的web开发借鉴mvc开发模式，使得程序的设计更加合理性。
+
+M: model模型
+
+​     是完成具体的业务操作  如封装数据   查询数据库 (JavaBean)
+
+V:  view 视图  
+
+​      展示数据   (jsp)
+
+C:  controller控制器  
+
+​      获取客户端的输入  调用模型   将数据交给视图展示   （servlet）
+
+优缺点：
+
+​       优点：耦合性低  方便维护  重用性高
+
+​       缺点：对程序员要求高
 
 
 
+#### EL表达式
 
+expression language表达式
+
+jsp默认支持el表达式。
+
+
+
+#### JSTL
+
+JavaServer Pages Tag Library  JSP标准标签库
+
+作用：用于简化和替换jsp页面上的java代码
 
 
 
