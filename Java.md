@@ -401,9 +401,15 @@ c:if没有else
 
 项目位于/day17_case    项目栈：`Druid+MySQL+CSS+HTML+Jquery+JDBC+Tomcat`
 
+###### 案例：综合练习，改进用户信息列表：
 
+​        简单功能：列表查询、登录、添加、单条删除、修改
 
+​        复杂功能：多条删除、分页功能、组合查询
 
+注意：重定向是`response.sendRedirect(页面)`   转发是`request.getRequestDispather(页面).forward(request,response)`.
+
+登录成功是重定向，登录失败是转发。
 
 
 
