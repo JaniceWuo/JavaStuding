@@ -379,11 +379,27 @@ JavaServer Pages Tag Library  JSP标准标签库
 
 作用：用于简化和替换jsp页面上的java代码
 
+常用的JSTL标签:if    choose    foreach
+
+c:if没有else
 
 
 
+### 5.11   :baby_bottle:
 
+#### 三层架构:软件设计架构
 
+1.界面层（表示层）：用户看的界面，用户可以通过界面上的组件和服务器进行交互。  ***.jsp
+
+2.业务逻辑层：处理业务逻辑的  Servlet
+
+3.数据访问层：操作数据存储文件  Dao
+
+###### 案例：用户信息列表展示
+
+​      从index.jsp进入，超链接指向userListServlet，UserListServlet.java中的方法完成收集数据库中用户信息以及setAttribute并转发到list.jsp中的任务，调用UserServiceImpl——>UserDaoImpl进行数据库查询保存结果的任务。
+
+项目位于/day17_case    项目栈：`Druid+MySQL+CSS+HTML+Jquery+JDBC+Tomcat`
 
 
 
