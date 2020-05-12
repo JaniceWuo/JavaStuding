@@ -409,13 +409,15 @@ c:if没有else
 
 注意：重定向是`response.sendRedirect(页面)`   转发是`request.getRequestDispather(页面).forward(request,response)`.
 
-登录成功是重定向，登录失败是转发。
+登录成功是重定向，登录失败是转发，转发不改路径。
 
+**要掌握这种思想：点击页面上的按钮所要进行的查询、提交等功能都要交给servlet，在servlet获取到数据后完成保存，存到request域中，然后转发到另一个jsp，在这个jsp中进行request域值的获取以及展示。
 
+有域共享时要用到request.setAttribute，那就可以进行转发。
 
+逻辑：前端jsp——>相关的servlet——>Service（service完成的是数据库复杂功能的交互，return返回数据即可）——>Dao（定义多个函数，每个函数负责一个sql语句的完成，在dao中使用Druid连接池）
 
-
-
+template.query()好像是用于返回多条数据的，template.queryForObject()用于返回一条数据。二者都可以用`sql,new BeanPropertyRowMapper<User>(User.class),**,**`这种格式。
 
 
 
