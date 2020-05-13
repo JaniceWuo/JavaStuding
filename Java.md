@@ -419,13 +419,13 @@ c:if没有else
 
 template.query()好像是用于返回多条数据的，template.queryForObject()用于返回一条数据。二者都可以用`sql,new BeanPropertyRowMapper<User>(User.class),**,**`这种格式。
 
+项目位于day17_case
 
+**拼接sql的小技巧:**
 
+**先只写：select count(*) from user where 1 = 1；然后拼接“and name = ?” "and password=?"等等。**
 
-
-
-
-
+**在jsp页面中，<form....... action="一个servlet">   各种表单信息 <input type="text">        </form>。在servlet中通过`request.getParameterMap()`会获取到各种表单参数，是要在表单中加上name，如<input type="text" name="addrress">，然后就会获取到`address`参数中用户填的数据。如果要在文本框中回显数据，应该在servlet使用request.setAttribute()储存一下参数集合，然后在jsp要回显的文本框中添加：value="${参数集合.address[0]}"。**
 
 
 
