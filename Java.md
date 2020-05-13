@@ -429,6 +429,16 @@ template.query()好像是用于返回多条数据的，template.queryForObject()
 
 
 
+### 5.13   :1st_place_medal:
+
+##### Filter:过滤器     Listener:监听器
+
+web中的过滤器：当访问服务器的资源时，过滤器可以将请求拦截下来，完成一些特殊的请求。
+
+​      作用：登录验证、统一编码处理、敏感字符过滤
+
+入门：定义一个类，实现接口Filter     复写方法   配置拦截路径
+
 
 
 
