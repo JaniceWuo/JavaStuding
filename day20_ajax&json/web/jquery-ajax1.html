@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jquery实现ajax第一种方式</title>
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script>
+        function fun() {
+            //使用$.ajax方式
+            $.ajax({
+                url:"ajaxServlet",
+                type:"POST",
+                // data:"username=jack&age=23",
+                data:{"username":"jack","age":23},
+                success:function (data) {
+                    alert(data);
+                },
+                }
+            );
+
+        }
+    </script>
+</head>
+<body>
+<input type="button" value="发送异步请求" onclick="fun()">
+<input>
+</body>
+</html>
