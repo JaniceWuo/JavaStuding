@@ -33,6 +33,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Class" />
+        <option value="AnnotationType" />
+        <option value="JUnit4 Test Class" />
         <option value="HTML File" />
       </list>
     </option>
@@ -48,19 +51,69 @@
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/web" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
+    <property name="create.test.in.the.same.root" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/web/WEB-INF/lib" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="test" />
+    </key>
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="test" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\githubProject\JavaStuding\day20_ajax&amp;json\web\WEB-INF\lib" />
       <recent name="E:\githubProject\JavaStuding\day20_ajax&amp;json\web" />
       <recent name="E:\githubProject\JavaStuding\day20_ajax&amp;json\web\js" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Tomcat Server.Tomcat 7.0.64">
+    <configuration name="JacksonTestTest.test1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="day20_ajax&amp;json" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="test.JacksonTestTest" />
+      <option name="METHOD_NAME" value="test1" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="JacksonTest.test1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="day20_ajax&amp;json" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="test.JacksonTest" />
+      <option name="METHOD_NAME" value="test1" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Tomcat 7.0.64" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 7.0.64" ALTERNATIVE_JRE_ENABLED="false">
       <option name="OPEN_IN_BROWSER" value="false" />
       <option name="UPDATE_ON_FRAME_DEACTIVATION" value="true" />
@@ -135,6 +188,17 @@
         </option>
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Tomcat Server.Tomcat 7.0.64" />
+      <item itemvalue="JUnit.JacksonTestTest.test1" />
+      <item itemvalue="JUnit.JacksonTest.test1" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.JacksonTest.test1" />
+        <item itemvalue="JUnit.JacksonTestTest.test1" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -146,7 +210,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1589459281363</updated>
-      <workItem from="1589459285316" duration="1847000" />
+      <workItem from="1589459285316" duration="10431000" />
     </task>
     <servers />
   </component>
@@ -165,41 +229,61 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state x="223" y="90" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1589460644372">
+    <state x="223" y="90" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1589529480866">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="223" y="90" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.864@0.0.1536.864" timestamp="1589460644372" />
-    <state width="1024" height="223" key="GridCell.Tab.0.bottom" timestamp="1589460725126">
+    <state x="223" y="90" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.864@0.0.1536.864" timestamp="1589529480866" />
+    <state x="574" y="125" key="#com.intellij.ide.util.MemberChooser" timestamp="1589527892045">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1024" height="223" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1589460725126" />
-    <state width="1024" height="223" key="GridCell.Tab.0.center" timestamp="1589460725126">
+    <state x="574" y="125" key="#com.intellij.ide.util.MemberChooser/0.0.1536.864@0.0.1536.864" timestamp="1589527892045" />
+    <state x="499" y="181" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1589528542785">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1024" height="223" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1589460725126" />
-    <state width="1024" height="223" key="GridCell.Tab.0.left" timestamp="1589460725126">
+    <state x="499" y="181" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.864@0.0.1536.864" timestamp="1589528542785" />
+    <state width="1116" height="281" key="GridCell.Tab.0.bottom" timestamp="1589537657572">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1024" height="223" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1589460725126" />
-    <state width="1024" height="223" key="GridCell.Tab.0.right" timestamp="1589460725126">
+    <state width="1116" height="281" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1589537657572" />
+    <state width="1116" height="281" key="GridCell.Tab.0.center" timestamp="1589537657571">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1024" height="223" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1589460725126" />
-    <state width="1024" height="223" key="GridCell.Tab.1.bottom" timestamp="1589460725127">
+    <state width="1116" height="281" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1589537657571" />
+    <state width="1116" height="281" key="GridCell.Tab.0.left" timestamp="1589537657571">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1024" height="223" key="GridCell.Tab.1.bottom/0.0.1536.864@0.0.1536.864" timestamp="1589460725127" />
-    <state width="1024" height="223" key="GridCell.Tab.1.center" timestamp="1589460725127">
+    <state width="1116" height="281" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1589537657571" />
+    <state width="1116" height="281" key="GridCell.Tab.0.right" timestamp="1589537657571">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1024" height="223" key="GridCell.Tab.1.center/0.0.1536.864@0.0.1536.864" timestamp="1589460725127" />
-    <state width="1024" height="223" key="GridCell.Tab.1.left" timestamp="1589460725126">
+    <state width="1116" height="281" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1589537657571" />
+    <state width="1024" height="223" key="GridCell.Tab.1.bottom" timestamp="1589461142986">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1024" height="223" key="GridCell.Tab.1.left/0.0.1536.864@0.0.1536.864" timestamp="1589460725126" />
-    <state width="1024" height="223" key="GridCell.Tab.1.right" timestamp="1589460725127">
+    <state width="1024" height="223" key="GridCell.Tab.1.bottom/0.0.1536.864@0.0.1536.864" timestamp="1589461142986" />
+    <state width="1024" height="223" key="GridCell.Tab.1.center" timestamp="1589461142985">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1024" height="223" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1589460725127" />
+    <state width="1024" height="223" key="GridCell.Tab.1.center/0.0.1536.864@0.0.1536.864" timestamp="1589461142985" />
+    <state width="1024" height="223" key="GridCell.Tab.1.left" timestamp="1589461142985">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1024" height="223" key="GridCell.Tab.1.left/0.0.1536.864@0.0.1536.864" timestamp="1589461142985" />
+    <state width="1024" height="223" key="GridCell.Tab.1.right" timestamp="1589461142985">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1024" height="223" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1589461142985" />
+    <state x="272" y="78" key="SettingsEditor" timestamp="1589531480224">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="272" y="78" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1589531480224" />
+    <state x="568" y="325" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1589531529996">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="568" y="325" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1536.864@0.0.1536.864" timestamp="1589531529996" />
+    <state x="672" y="264" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1589531512248">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="672" y="264" key="com.intellij.testIntegration.createTest.CreateTestDialog/0.0.1536.864@0.0.1536.864" timestamp="1589531512248" />
   </component>
 </project>

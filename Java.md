@@ -509,6 +509,42 @@ AJAX能够在无需重新加载全部页面的条件下，加载部分页面资�
 
 
 
+### 5.15 
+
+#### JSON : JavaScript  Object Notation  javascript对象表示法
+
+语法：
+
+​        基本规则：由键值对构成
+
+json数据和java对象的相互转换：
+
+​        json解析器：Jsonlib/fastjson/jackson
+
+###### 案例：
+
+​       校验用户名是否存在：注册页面用户输入用户名后，当文本输入框失去焦点后，发送ajax请求，查询数据库中是否存在该用户名，如果存在则提示用户该用户名不可用，如果不存在则提示可用。
+
+​      要注意将数据设置为`response.setContentType("application/json;charset=utf-8");`
+
+​      项目位于`day20_ajax&json`。
+
+#### redis
+
+概念：redis是一款高性能的NOSQL系列的非关系型数据库。键值对。
+
+​          非关系型数据库的数据之间没有关联，数据存储在内存中。 
+
+​          一般会将数据存储在关系型数据库中，在nosql数据库中备份存储关系型数据库的数据。
+
+
+
+
+
+
+
+
+
 
 
 
