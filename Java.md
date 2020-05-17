@@ -555,15 +555,19 @@ Java客户端：jedis  一款java操作redis数据库的工具
 
  jedis连接池，自带的：JedisPool    
 
-######  案例：       
+######  案例：页面有省份下拉列表，可以选择省份 当页面加载完成后，发送ajax请求，加载所有省份。
+
+###### index.html——>servlet(调用service完成查询,将数据序列化为json,响应数据)——>service ——>Dao——>数据库    
+
+优化：因为数据库中的省份信息`不常变更`，所以可以使用redis缓存。在serviceImpl中添加从redis中查询数据的方法。
+
+**如果数据库表执行增删改的操作，那么需要将redis缓存数据情况，再次存入。在service对应的增删改方法中，将redis数据删除**
 
 
 
+### 5.17  :baby_chick:
 
-
-
-
-
+#### Maven : jar包管理   将Jar包与项目分离
 
 
 

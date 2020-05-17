@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="day23_redis:war exploded" />
+    </artifacts-to-build>
+  </component>
   <component name="BranchesTreeState">
     <expand>
       <path>
@@ -28,7 +33,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -42,6 +49,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
@@ -53,7 +61,7 @@
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
     <property name="create.test.in.the.same.root" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/web/WEB-INF/lib" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/util" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
@@ -64,10 +72,13 @@
       <recent name="" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\githubProject\JavaStuding\day23_redis\src\util" />
+      <recent name="E:\githubProject\JavaStuding\day23_redis\web\js" />
+      <recent name="E:\githubProject\JavaStuding\day23_redis\src" />
       <recent name="E:\githubProject\JavaStuding\day23_redis\web\WEB-INF\lib" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.JedisTest.test8">
+  <component name="RunManager" selected="Tomcat Server.Tomcat 7.0.64">
     <configuration name="JedisTest.Test4" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="day23_redis" />
       <extension name="coverage">
@@ -149,19 +160,74 @@
       </method>
     </configuration>
     <configuration name="Tomcat 7.0.64" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 7.0.64" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="OPEN_IN_BROWSER" value="false" />
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:80/day23/" />
+      <option name="BROWSER_ID" value="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
+      <option name="UPDATE_ON_FRAME_DEACTIVATION" value="true" />
+      <option name="UPDATE_CLASSES_ON_FRAME_DEACTIVATION" value="true" />
       <deployment>
         <artifact name="day23_redis:war exploded">
           <settings>
-            <option name="CONTEXT_PATH" value="/day23_redis_war_exploded" />
+            <option name="CONTEXT_PATH" value="/day23" />
           </settings>
         </artifact>
       </deployment>
-      <server-settings />
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="Tomcat_7_0_64_day23_redis" />
+      </server-settings>
       <predefined_log_file enabled="true" id="Tomcat" />
       <predefined_log_file enabled="true" id="Tomcat Catalina" />
       <predefined_log_file id="Tomcat Manager" />
       <predefined_log_file id="Tomcat Host Manager" />
       <predefined_log_file id="Tomcat Localhost Access" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="51864" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
       <method v="2">
         <option name="Make" enabled="true" />
         <option name="BuildArtifacts" enabled="true">
@@ -169,6 +235,14 @@
         </option>
       </method>
     </configuration>
+    <list>
+      <item itemvalue="JUnit.JedisTest.Test4" />
+      <item itemvalue="JUnit.JedisTest.Test5" />
+      <item itemvalue="JUnit.JedisTest.Test6" />
+      <item itemvalue="JUnit.JedisTest.test7" />
+      <item itemvalue="JUnit.JedisTest.test8" />
+      <item itemvalue="Tomcat Server.Tomcat 7.0.64" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.JedisTest.test8" />
@@ -189,7 +263,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1589613244614</updated>
-      <workItem from="1589613252289" duration="6530000" />
+      <workItem from="1589613252289" duration="13485000" />
     </task>
     <servers />
   </component>
@@ -208,38 +282,50 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state width="1493" height="223" key="GridCell.Tab.0.bottom" timestamp="1589618537660">
+    <state x="223" y="90" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1589682369129">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="223" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1589618537660" />
-    <state width="1493" height="223" key="GridCell.Tab.0.center" timestamp="1589618537660">
+    <state x="223" y="90" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.864@0.0.1536.864" timestamp="1589682369129" />
+    <state x="574" y="125" key="#com.intellij.ide.util.MemberChooser" timestamp="1589683080411">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="223" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1589618537660" />
-    <state width="1493" height="223" key="GridCell.Tab.0.left" timestamp="1589618537659">
+    <state x="574" y="125" key="#com.intellij.ide.util.MemberChooser/0.0.1536.864@0.0.1536.864" timestamp="1589683080411" />
+    <state x="549" y="190" key="FileChooserDialogImpl" timestamp="1589693591230">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="223" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1589618537659" />
-    <state width="1493" height="223" key="GridCell.Tab.0.right" timestamp="1589618537660">
+    <state x="549" y="190" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1589693591230" />
+    <state width="1024" height="245" key="GridCell.Tab.0.bottom" timestamp="1589694441035">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="223" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1589618537660" />
-    <state width="1493" height="277" key="GridCell.Tab.1.bottom" timestamp="1589617227109">
+    <state width="1024" height="245" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1589694441035" />
+    <state width="1024" height="245" key="GridCell.Tab.0.center" timestamp="1589694441035">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="277" key="GridCell.Tab.1.bottom/0.0.1536.864@0.0.1536.864" timestamp="1589617227109" />
-    <state width="1493" height="277" key="GridCell.Tab.1.center" timestamp="1589617227109">
+    <state width="1024" height="245" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1589694441035" />
+    <state width="1024" height="245" key="GridCell.Tab.0.left" timestamp="1589694441035">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="277" key="GridCell.Tab.1.center/0.0.1536.864@0.0.1536.864" timestamp="1589617227109" />
-    <state width="1493" height="277" key="GridCell.Tab.1.left" timestamp="1589617227109">
+    <state width="1024" height="245" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1589694441035" />
+    <state width="1024" height="245" key="GridCell.Tab.0.right" timestamp="1589694441035">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="277" key="GridCell.Tab.1.left/0.0.1536.864@0.0.1536.864" timestamp="1589617227109" />
-    <state width="1493" height="277" key="GridCell.Tab.1.right" timestamp="1589617227109">
+    <state width="1024" height="245" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1589694441035" />
+    <state width="1493" height="277" key="GridCell.Tab.1.bottom" timestamp="1589694441029">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="277" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1589617227109" />
+    <state width="1493" height="277" key="GridCell.Tab.1.bottom/0.0.1536.864@0.0.1536.864" timestamp="1589694441029" />
+    <state width="1493" height="277" key="GridCell.Tab.1.center" timestamp="1589694441029">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="277" key="GridCell.Tab.1.center/0.0.1536.864@0.0.1536.864" timestamp="1589694441029" />
+    <state width="1493" height="277" key="GridCell.Tab.1.left" timestamp="1589694441029">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="277" key="GridCell.Tab.1.left/0.0.1536.864@0.0.1536.864" timestamp="1589694441029" />
+    <state width="1493" height="277" key="GridCell.Tab.1.right" timestamp="1589694441029">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="277" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1589694441029" />
     <state x="272" y="78" key="SettingsEditor" timestamp="1589613538180">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
@@ -252,5 +338,13 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="540" y="256" key="com.intellij.testIntegration.createTest.CreateTestDialog/0.0.1536.864@0.0.1536.864" timestamp="1589613597395" />
+    <state x="178" y="16" key="new project wizard" timestamp="1589694437271">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="178" y="16" key="new project wizard/0.0.1536.864@0.0.1536.864" timestamp="1589694437271" />
+    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1589683483721">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup/0.0.1536.864@0.0.1536.864" timestamp="1589683483721" />
   </component>
 </project>
