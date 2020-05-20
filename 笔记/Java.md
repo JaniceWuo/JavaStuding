@@ -82,6 +82,8 @@ String str5 = str3 + str4;//str2!=str5
 
 `StringBuilder`线程不安全，但是效率高；`StringBuffer`线程安全但是效率较低。
 
+`StringBuffer`的方法都是由synchronized修饰的，所以是线程安全的类。
+
 如果有如下代码：
 
 ```java
@@ -571,9 +573,27 @@ Java客户端：jedis  一款java操作redis数据库的工具
 
 
 
+### 5.20 :black_heart:
 
+#### 反射
 
+先来学习一下类对象  3种方式：类名.class   new 类().getClass()  Class.forName(那个类的位置)
 
+上述方法除了`类名.class`这种方式外，其他的两种方式都可以导致静态属性被初始化。
+
+当synchronized修饰静态方法的时候， 同步对象就是这个类的类对象。
+
+通过反射机制调用类的某个方法：
+
+​       Hero h = new Hero();
+
+​       Method m =  h.getClass().getMethod("setName",String.class);
+
+​       m.invoke(h,"盖伦");
+
+在学习Spring的依赖注入，反转控制之后，才会对反射有更好的理解。
+
+（好像要建个文件，里面存入类名和要调用的方法名，然后编写代码取出类名称和方法名，通过反射去调用这个方法）
 
 
 
