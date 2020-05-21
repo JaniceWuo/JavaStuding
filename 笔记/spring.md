@@ -22,13 +22,21 @@ spring是一个基于IOC(反转控制)和AOP的结构J2EE系统的框架。
 
 应该要做到，编译期不依赖，运行时才依赖。
 
-JavaBean  用java语言编写的可重用组件。  需要一个配置文件来配置service和dao，通过读取文件中配置的内容，反射创建对象。
+解耦思路：1.使用反射创建对象，而避免使用new关键字。2.通过配置文件来获取要创建的对象类名。
 
-**不要使用相对路径和绝对路径，通过BeanFactory.class.getClassLoader().getResourceAsStream(properties文件)来获取properties文件流对象。**
+JavaBean  用java语言编写的可重用组件。  需要一个配置文件来配置service和dao，通过读取文件中配置的内容，反射创建对象。配置文件可以是xml和properties。
+
+**不要使用相对路径和绝对路径，要通过BeanFactory.class.getClassLoader().getResourceAsStream(properties文件)来获取properties文件流对象。**
+
+resources文件夹下的文件最后会成为每个文件夹下的文件。
 
 通过反射机制创建对象。
 
 
+
+### 5.21
+
+使用spring的IOC解决程序耦合
 
 
 
