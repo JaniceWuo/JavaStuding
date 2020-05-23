@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.IUserDao">
+    <!---这里的id不能随便写 要写类里面的方法名称-->
+    <select id="findAll">
+        select * from user;
+    </select>
+
+</mapper>
