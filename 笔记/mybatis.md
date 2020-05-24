@@ -22,6 +22,26 @@ ORM：Object Relation Mapping 对象关系映射
 
 ​       遵从上述法则后，在开发中无需再写dao的实现类，只需定义个接口
 
+**使用注解更方便：移除IUserDao.xml，在dao接口的方法上面使用@Select注解，同时需要在config.xml中的mapper配置时，使用class属性指定dao接口的类名。**
+
+
+
+##### 注解方式：
+
+在mybatis中针对CRUD一共有四个注解：@Select @Insert @Update @Delete
+
+整个开发要用注解就都用注解，如果既有注解又有xml就会出错。
+
+
+
+如果两张表是一对一关系，则用one=@One()，如果是一对多则用many=@Many()。
+
+
+
+
+
+
+
 
 
 

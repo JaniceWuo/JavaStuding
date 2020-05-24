@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dao.IUserDao">
-    <!---这里的id不能随便写 要写类里面的方法名称  还要说明封装到哪里去-->
+    <!---这里的id不能随便写 要写类里面的方法名称-->
     <select id="findAll" resultType="com.domain.User">
         select * from user;
     </select>
