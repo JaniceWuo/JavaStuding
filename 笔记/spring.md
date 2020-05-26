@@ -94,7 +94,7 @@ AnnotationConfigApplicationContext 用于读取注释创建容器。
 
 ​        活着：只要容器还在，对象一直活着
 
-​        死亡：容器销毁，对象向往
+​        死亡：容器销毁，对象消亡
 
 所以单例对象的生命周期和容器相同
 
@@ -144,7 +144,63 @@ AnnotationConfigApplicationContext 用于读取注释创建容器。
 
 注入数据的：
 
-​        Autowired:自动按类型注入
+​        Autowired:自动按类型注入  如果Ioc容器中有多个类型匹配就会出错。
+
+​        Qualifier:在按照类中注入的基础之上再按照名称注入。在给类成员注入时不能单独使用，但是在给方法参数注入时可以。
+
+​        Resource:直接按照bean的id注入，可以单独使用
+
+​     以上三个注入都只能注入其他bean类型的数据，而基本类型和String类型无法使用上述注解实现。另外，集合类型的注入只能通过XML来实现。
+
+​         Value:用于注入基本类型和String类型的数据。可以使用SpEL(spring中的el表达式)
+
+
+
+##### 基于xml的ioc案例
+
+<bean id = "随便取" class = "一般是一个impl">
+
+<property name = "这个是类里面的方法去掉set后的首字母改小写" ref = "定义的另外一个bean的id"></property>
+
+</bean>
+
+用到了QueryRunner,在bean.xml中也要对其进行配置，并且设置成prototype。
+
+代码位于Spring_study/spring_day02anno_xmlioc
+
+
+
+##### 基于注解的案例
+
+别忘了在bean.xml中告知spring在创建容器时要扫描的包：
+
+```java
+<context:component-scan base-package="com"></context:component-scan>
+```
+
+而且使用注解在bean.xml开头要导入的和基于xml导入的不一样。
+
+代码位于Spring_study/spring_day02account_annoIoc
+
+
+
+##### spring的新注解
+
+Configuration  指定当前类是一个配置类  
+
+ComponentScan  用于通过注解指定spring在创建容器时要扫描的包
+
+Bean  用于把当前方法的返回值作为bean对象存入spring的ioc容器中。  如果方法有参数，那spring框架会去容器中查找有没有可用的bean对象。查找的方式和Autowired一样。
+
+Import  用于导入其他的配置类
+
+PropertySource  用于指定properties文件的位置  
+
+​                属性：value 指定文件的名字和路径
+
+使用JUnit单元测试 测试我们的配置
+
+代码位于：Spring_study/day_02account_annoIoc_withoutxml
 
 
 
