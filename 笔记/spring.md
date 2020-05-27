@@ -204,7 +204,44 @@ PropertySource  用于指定properties文件的位置
 
 
 
+### 5.27   day_3
+
+事物问题：在转账业务中，如果转出账户和转入账户的操作没有同步的话，影响很大。
+
+用了`ThreadLocal`
+
+代码位于day03_01account
+
+##### 动态代理：
+
+特点：字节码随用随创建，随用随加载
+
+###### 基于接口的动态代理：Proxy.newProxyInstance
+
+​       如何创建代理对象：
+
+​        使用Proxy类中的newProxyInstance()方法。要求被代理类最少实现一个接口。
+
+​         newProxyInstance方法的参数：
+
+​         ClassLoader:类加载器  用于加载代理对象字节码的。固定写法
+
+​         Class[]:字节码数组。固定写法。
+
+​         InvocationHandler:用于提供增强的代码。 此接口的实现类都是谁用谁写。
+
+###### 基于子类的动态代理：Enhancer.create
+
+​        由第三方cglib库提供
+
+​        要求被代理类不能是最终类。
+
+##### AOP
+
+作用：在程序运行期间，不修改源码对已有方法进行增强。
+
+实现方式：实现动态代理
 
 
 
-
+#### spring中的AOP
