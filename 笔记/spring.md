@@ -138,9 +138,9 @@ AnnotationConfigApplicationContext 用于读取注释创建容器。
 
 ​       Controller:一般用在表现层
 
-​       Service:一般用在业务层
+​       Service:一般用在业务层(Service)
 
-​       Repository:一般用于持久层
+​       Repository:一般用于持久层（Dao）
 
 注入数据的：
 
@@ -268,11 +268,94 @@ spring的环绕通知:
 
 
 
+### 5_28 day_4  :jack_o_lantern:
+
+1.spring中的JdbcTemplate：
+
+​      JdbcTemplate作用：和数据库进行交互
+
+2.作业：
+
+###### 将account项目改为用spring基于xml的AOP的事物控制
+
+代码位于`day04/02account_aoptx_xml`
+
+（注意bean标签要改为aop的）
+
+```java
+<aop:config>
+        <!--配置通用切入点表达式-->
+        <aop:pointcut id="pt1" expression="execution(* com.service.impl.*.*(..))"></aop:pointcut>
+
+        <aop:aspect id="tsAdvice" ref="tsManager">
+            <!--配置前置通知  开启事物-->
+            <aop:before method="beginTransaction" pointcut-ref="pt1"></aop:before>
+            <!--配置后置通知  提交事物-->
+            <aop:after-returning method="commit" pointcut-ref="pt1"></aop:after-returning>
+            <!--配置异常通知  回滚事物-->
+            <aop:after-throwing method="rollback" pointcut-ref="pt1"></aop:after-throwing>
+            <!--配置最终通知  释放连接-->
+            <aop:after method="release" pointcut-ref="pt1"></aop:after>
+        </aop:aspect>
+</aop:config>
+```
 
 
 
+###### 将account改为基于注解的spring AOP:
+
+bean.xml中内容少很多。而且类中定义的变量都用@Autowired进行赋值，不需要set方法。
+
+本来是要在TransactionManager.java中的每个方法前面加上对应的切面注解，比如@Before，@After等等，对应上面配置的bean.xml。但是spring的基于注解调用顺序有问题，会先调用最终通知导致线程被释放，所以这里改为使用环绕通知。
+
+```java
+@Around("pt1()")
+public Object aroundAdvice(ProceedingJoinPoint pjp){
+        Object returnValue = null;
+        try{
+            Object[] args = pjp.getArgs();
+            this.beginTransaction();
+            returnValue = pjp.proceed(args);
+            this.commit();
+            return returnValue;
+        }catch (Throwable e){
+            this.rollback();
+            throw new RuntimeException(e);
+        }finally {
+            this.release();
+        }
+    }
+```
+
+还要在bean.xml里开启注解AOP的支持：
+
+```java
+<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+```
+
+代码见`day04/03account_aoptx_anno`
 
 
 
+### 5.29
 
+spring中有JdbcDaoSupport类，用extends即可调用。但是这样的话就不能用基于注解。
+
+用了@Autowired之后，就不需要set方法了。使用@Autowired后会去bean.xml里面找有没有配置相应的<bean>标签，如果没有的话也会报错。
+
+再次提醒<property name="">中的name属性是set方法后面首字母变小写。
+
+#### 事务控制
+
+事务控制也是基于AOP的  所以需要导aspectjweaver。
+
+spring基于xml的声明式事务控制：`05tx_xml`
+
+spring基于注解的声明式事务控制: `06tx_anno`
+
+(如果使用注解，一个类中有多个方法的话可能会比较麻烦，但是xml可以一劳永逸)
+
+spring基于纯注解：test.java中的@ContextConfiguration内容要改成classes=另一个java文件。代码位于:`07anno_tx_withoutxml`
+
+（因为把@ComponentScan写成了@Component导致找不到IAccountService类的bean对象....又找错找了半个小时！！！）
 
