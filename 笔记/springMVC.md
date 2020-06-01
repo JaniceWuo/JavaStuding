@@ -84,6 +84,32 @@ method用于指定请求方式。
 
 以后都是在写的Controller.java中将数据存储到request域中，在jsp文件中就可以获取。
 
+使用Model model,model.addAttribute()可以把对象存储到request域中;ModelAndView mv = new ModelAndView(),mv.addObject()也可以。
+
+使用关键字方式进行重定向都不需要加request.getContextPath()，框架直接就能找到index.jsp。但是重定向不能找到WEB-INF目录下的页面。
+
+#### springMVC实现文件上传
+
+前提：form表单的enctype取值必须是：multipart/form-data
+
+要配置文件解析器
+
+**MultipartFile  名字 要跟form表单里面的name一样。**
+
+
+
+#### 跨服务器文件上传
+
+应用服务器   图片服务器
+
+
+
+
+
+
+
+
+
 
 
 
