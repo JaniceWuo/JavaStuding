@@ -102,9 +102,49 @@ method用于指定请求方式。
 
 应用服务器   图片服务器
 
+代码位于fileUploadServer和springmvc_day02_02_fileupload
+
+有个问题就是配置两个tomcat不行，只能在原有的基础上多部署一个项目。
+
+#### SpringMVC异常处理
+
+web会抛异常给前端控制器  如果前端控制器没有异常处理器则会抛给浏览器，浏览器就会显示错误提示页面   这是很不友好的。应该要跳到一个写好的友好界面。
+
+异常处理器要实现一个接口：HandlerExceptionResolver
+
+代码位于springmvc_day02_03_exception
+
+#### SpringMVC拦截器
+
+过滤器是servlet规范中的一部分  任何Java web工程都能用
+
+拦截器是SpringMVC框架自己的  只有使用了SpringMVC框架的工程才能用
+
+拦截器不能对jsp/html/css/js进行拦截，只会拦截访问的控制器方法。
+
+编写拦截器类，实现HandlerInterceptor接口   如果实现了里面的preHandle方法，则会先执行它，最后返回true表示放行，false表示不放行。
 
 
 
+### day_3  :blonde_woman:
+
+SSM
+
+搭建整合环境：SSM整合可以使用多种方式
+
+表现层：SpringMVC框架
+
+业务层：Spring框架
+
+持久层：MyBatis框架
+
+整合思路：
+
+​        1.先搭整合环境
+
+​        2.先把spring配置搭建完成
+
+​        3.用Spring整合SpringMVC和MyBatis
 
 
 
