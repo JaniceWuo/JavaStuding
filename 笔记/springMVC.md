@@ -128,7 +128,7 @@ web会抛异常给前端控制器  如果前端控制器没有异常处理器则
 
 ### day_3  :blonde_woman:
 
-SSM
+### SSM
 
 搭建整合环境：SSM整合可以使用多种方式
 
@@ -148,15 +148,28 @@ SSM
 
 
 
+##### Spring整合SpringMVC框架：
+
+目的：在controller中能成功调用service对象中的方法
+
+前端控制器里面加载了springmvc.xml，但是springmvc.xml中规定只扫描Controller注解，此时没有加载ApplicationContext.xml，那就没有将service加入容器中。
+
+springmvc.xml只扫描controller，spring的配置文件排除扫描controller,因为spring管理持久层和业务层，而springmvc才管理表现层。
+
+（问题：没有写spring监听器也可以调用service???）
+
+dao就是和数据库打交道的  所以MyBatis也是管理数据库相关的 
+
+dao里面的查询不需要提交事物  但是增删改一定要
+
+##### Spring整合MyBatis：
+
+service中能调用dao进行数据库的查询等操作就是整合成功。
 
 
 
+整个SSM逻辑：
 
+用户点击页面上的超链接，调用的是controller包下面的AccountController.java，里面调用了service方法，写一个Model model可以将查询到的结果存到域里面并在list.jsp中真的去获取数据并显示。service调用了dao进行数据库操作。
 
-
-
-
-
-
-
-
+代码位于`ssm`
