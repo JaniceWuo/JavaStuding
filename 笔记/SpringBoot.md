@@ -88,6 +88,116 @@ person.dog.age = 3
 
 
 
+#### 6/11 
+
+#### 日志
+
+市面上的日志框架有很多。
+
+日志门面：选SLF4J
+
+日志实现：选logback
+
+SpringBoot也是选用SLF4j和logback
+
+##### SLF4j使用
+
+1.如何在系统中使用SLF4j
+
+开发的时候，不应该直接调用日志的实现类，而是调用日志抽象层里面的方法。
+
+##### 如何让系统中所有日志都统一到slf4j?
+
+**将系统中其他日志框架先排除出去，再用中间包替换原有日志框架，导入slf4j其他的实现。**
+
+
+
+SpringBoot的日志
+
+底层也是使用slf4j+logback的方式进行日志记录。
+
+SpringBoot也把其他的日志替换成了slf4j
+
+
+
+日志级别：trace<debug<info<warn<error
+
+SpringBoot默认使用的是info级别的
+
+
+
+#### Web开发
+
+使用SpringBoot:
+
+创建SpringBoot应用，选中我们需要的模块。SpringBoot已经默认将这些场景配置好了，只需要在配置文件中指定少量配置就可以了。然后自己编写业务代码。
+
+要去webjars网站找相关maven依赖。
+
+SpringBoot对静态资源的映射规则：
+
+1.所有/webjars/**，都去classpath:/META-INF/resources/webjars/找资源。
+
+比如http://localhost:8081/webjars/jquery/3.5.1/jquery.js就可以访问到js资源
+
+2.如果是自己写的静态资源，则可以放在"classpath:/META-INF/resources/"、"classpath:/resources/"、"classpath:/static/"、"classpath:/public/"这些静态资源文件夹下以及当前项目的根路径下。
+
+3.欢迎页：静态资源文件夹下所有的index.html页面  被/**映射。
+
+4.所有的**/favicon.ico都是在静态资源文件夹下找（但是我只能放在resources/resources下）
+
+
+
+#### 模板引擎
+
+Jsp  Thymeleaf等
+
+#### Thymeleaf使用&语法
+
+只要把html放在classpath:/templates/  就能自动渲染
+
+使用：
+
+1.导入thymeleaf的名称空间：xmlns:th="http://www.thymeleaf.org"
+
+语法规则：
+
+th:text  th:if  th:href等等
+
+表达式：
+
+${} 获取对象的属性、调用方法
+
+@{...}定义url
+
+~{...}片段引用表达式
+
+还支持各种运算：bool  数学运算等
+
+
+
+#### SpringMVC
+
+SpringBoot自动配置了ViewResolver
+
+如何修改SpringBoot的默认配置？
+
+SpringBoot在自动配置很多组件的时候，先看容器中有没有用户自己配置的（@Bean  @Component) 如果有就用用户配置的 如果没有才自动配置。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
