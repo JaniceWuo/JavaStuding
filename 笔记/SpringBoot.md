@@ -1,4 +1,4 @@
-#### 课程：尚硅谷SpringBoot顶尖教程
+#### 课程：尚硅谷SpringBoot顶尖教程  (雷丰阳)
 
 Spring全家桶：Spring Boot—>J2EE一站式解决方案
 
@@ -144,7 +144,7 @@ SpringBoot对静态资源的映射规则：
 
 3.欢迎页：静态资源文件夹下所有的index.html页面  被/**映射。
 
-4.所有的**/favicon.ico都是在静态资源文件夹下找（但是我只能放在resources/resources下）
+4.所有的**/favicon.ico都是在静态资源文件夹下找（但是我只能放在resources/static下才能找到）
 
 
 
@@ -184,17 +184,65 @@ SpringBoot自动配置了ViewResolver
 
 SpringBoot在自动配置很多组件的时候，先看容器中有没有用户自己配置的（@Bean  @Component) 如果有就用用户配置的 如果没有才自动配置。
 
+##### 扩展SpringMVC  
+
+```java
+@Configuration
+public class MyMvcConfig extends WebMvcConfigurerAdapter {
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/janice").setViewName("success");
+    }
+}
+```
+
+##### 全面接管SpringMVC:
+
+SpringBoot对SpringMVC自动配置不需要了，所有都是我们自己配
+
+我们需要在配置类中添加@EnableWebMvc,这样就意味着所有的自动配置都失效。(不推荐这样做)
+
+为什么@EnableWebMvc会让自动配置失效？：
+
+因为@EnableWebMvc将WebMvcConfigurationSupport组件导入进来，导入的WebMvcConfigurationSupport只是SpringMVC最基本的功能。
 
 
 
+#### RestfulCRUD
 
+登录页面的国际化（点中文显示中文，点英文显示英文）：
 
+1.编写国际化配置文件
 
+2.使用ResourceBundleMessageSource管理国际化资源文件
 
+（指定下自己的国际化文件路径，让SpringBoot管理：spring.messages.basename=i18n.login）
 
+3.在页面使用fmt:message取出国际化消息
 
+login.properties是没有配置语言时显示的；login_en.properties是英文，login_zh_CN.properties是中文。（IDEA有bug，自己写Text吧）
 
+这样就可以根据浏览器设置的语言优先级来改变中英文。
 
+##### 想要实现根据按钮点击来切换语言：
+
+需要自己实现localResolver  在连接上实现区域信息
+
+要在切换按钮那儿加个链接：th:href="@{/index.html(l='en_US')}"   然后在自己写的MyLocaleResolver里面获取l参数。
+
+```java
+@RequestMapping(value = "/user/login",method = RequestMethod.POST)和@PostMapping(value = "/user/login")一样，所以之后都用后者。
+```
+
+登录要提交用户名和密码，会写在一个form表单中，在form标签体内一定要加th:action=“@{路径}” 指明要提交的路径。然后再写个controller，路径和表单的一样，点击按钮后才会执行这个controller方法，在controller中判断用户名和密码是否符合，再return其他页面。
+
+```html
+<p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
+```
+
+判断msg是否为空，如果不为空才显示错误消息。
+
+因为登录后再刷新会弹出重复提交表单的选项，所以要使用重定向。
 
 
 
