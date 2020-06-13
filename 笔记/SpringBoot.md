@@ -210,6 +210,8 @@ SpringBoot对SpringMVC自动配置不需要了，所有都是我们自己配
 
 #### RestfulCRUD
 
+#### 登录功能实现
+
 登录页面的国际化（点中文显示中文，点英文显示英文）：
 
 1.编写国际化配置文件
@@ -243,6 +245,155 @@ login.properties是没有配置语言时显示的；login_en.properties是英文
 判断msg是否为空，如果不为空才显示错误消息。
 
 因为登录后再刷新会弹出重复提交表单的选项，所以要使用重定向。
+
+**这里还有一个问题，就是直接访问那个main页面不进行登录的话，也是可以访问成功，所以要用拦截器进行登录检查。**
+
+```java
+public class LoginHandlerInterceptor implements HandlerInterceptor {
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        Object user = request.getSession().getAttribute("loginUser");
+        if(user == null){
+            //表示未登录  返回登录页面
+            request.setAttribute("msg","没有权限，请先登录！");
+            request.getRequestDispatcher("/index.html").forward(request,response);
+            return false;
+        }else {
+            return true;
+        }
+    }
+}
+```
+
+还要在config里面配置才能生效。(springboot2.*也要过滤掉静态资源，否则就被拦截而没有样式)
+
+```java
+@Override
+public void addInterceptors(InterceptorRegistry registry) {
+    registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/**")
+            .excludePathPatterns("/index.html","/","/user/login","/asserts/**","/webjars/**");
+}
+```
+
+整个逻辑应该是在controller中验证用户名和密码是否正确，如果正确，要在session中存储用户名然后重定向到登录后的页面：
+
+```java
+@Controller
+public class LoginController {
+//    @RequestMapping(value = "/user/login",method = RequestMethod.POST)
+    @PostMapping(value = "/user/login")
+    public String login(@RequestParam("username") String username,
+                        @RequestParam("password") String password,
+                        Map<String,Object> map, HttpSession session){
+        if(!StringUtils.isEmpty(username) && "123456".equals(password)){
+            session.setAttribute("loginUser",username);
+            return "redirect:/main.html";
+        }else{
+            map.put("msg","用户名和密码错误");
+            return "login";
+        }
+
+    }
+}
+```
+
+在LoginHandlerInterceptor中用request.getSession().getAttribute（）去获取是否存的有用户名，如果有，说明登录了则返回true，如果没有说明没登录就设置一个"msg"并且转发到登录页面。
+
+在登录后的页面上要显示已登录的用户名的话，要用到thymeleaf取出session中存储的用户名：[[${session.loginUser}]]
+
+#### CRUD-员工列表
+
+CRUD要满足Rest风格:
+
+查询：emp--GET
+
+添加：emp--POST
+
+修改：emp/{id}--PUT
+
+删除：emp/{id}--DELETE
+
+实验的请求架构：
+
+| 实验功能                             | 请求URI | 请求方式 |
+| ------------------------------------ | ------- | -------- |
+| 查询所有员工                         | emps    | GET      |
+| 查询某个员工(来到修改页面)           | emp/1   | GET      |
+| 来到添加页面                         | emp     | GET      |
+| 添加员工                             | emp     | POST     |
+| 来到修改页面（查出员工进行信息回显） | emp/1   | GET      |
+| 修改员工                             | emp     | PUT      |
+| 删除员工                             | emp/1   | DELETE   |
+
+所以查询所有员工数据是emps发GET请求，则在html对应标签体内写th:href="@{/emps}"表示路径是要拼接上"/emps"。
+
+##### thymeleaf公共页面元素抽取：
+
+（当几个页面有公共元素时，共用一个就好，将它抽取出来  可以把代码都重新放在一个新的html中）
+
+用th:fragment="取个名字" 抽取   
+
+有三种方式引用所抽取的公共元素：
+
+​        th:insert=“” 将公共片段整个插入到声明引入的元素中
+
+​        th:replace=“”  替换
+
+​        th:include=“”  包含
+
+也可以直接给个id比如“sidebar” 然后用选择器<div th:replace="~{dashboard::#sidebar}"></div>
+
+##### 添加员工：
+
+要先到添加员工页面，然后进行添加。
+
+springMVC会自动将请求参数和入参的属性进行一一绑定  所以要求请求参数的名字和javaBean入参的属性名一致（意思是表单提交的会自动封装到参数对象）
+
+日期提交的格式有很多种，涉及格式化。默认按照/的方式。
+
+##### 修改员工：
+
+需要先到修改页面  修改页面路径为@GetMapping("/emp/{id}")
+
+要获取所修改的员工的id   将路径的参数"id"封装：@PathVariable("id") Integer id
+
+选中部门id：th:selected="${dept.id == emp.department.id}" 就是在遍历每个部门id的时候，要是它和当前编辑员工的id相同就显示它。
+
+由于添加员工和修改员工都是到add页面，所以add.html中要判断是哪种。
+
+（因为添加员工时emp是空的，而修改员工才有emp，所以表单th:value里面要判断一下当前emp是否为空）
+
+还要注意表单只有get和post，而修改员工是put请求，所以要加上：
+
+```java
+<input type="hidden" name="_method" value="put" th:if="${emp!=null}"/>
+```
+
+意思是只有是修改请求时才会创建该标签。
+
+还有就是在save方法中当没有获取员工的id时，就会选择自增的方式。而在修改员工信息时如果不获取他的id，就会自增id然后当成一个新的用户存入。所以修改员工时要获取id：
+
+```java
+<input type="hidden" name="id" th:if="${emp!=null}" th:value="${emp.id}"> 
+```
+
+##### 删除员工：
+
+在application.properties中要加上：
+
+```java
+spring.mvc.hiddenmethod.filter.enabled=true
+```
+
+否则会报post错误。
+
+#### 错误处理机制
+
+
+
+
+
+
 
 
 
