@@ -389,6 +389,120 @@ spring.mvc.hiddenmethod.filter.enabled=true
 
 #### 错误处理机制
 
+SpringBoot默认的错误处理机制：
+
+1、浏览器返回一个默认的错误页面
+
+2、客户端默认响应一个json数据
+
+参照ErrorMvcAutoConfiguration，一旦系统出现4xx或者5xx之类的错误，ErrorPageCustomizer就会生效，就会来到/error请求，就会被BasicErrorController处理：
+
+​       响应页面：去哪个页面是由DefaultErrorViewResolver决定
+
+如何定制错误响应：
+
+   1）如何定制错误页面：
+
+​       有模板引擎的情况下：error/状态码；将错误页面命名为 错误状态码.html放在模板引擎文件夹下的error文件夹下（比如templates/error/404.html)。也可以使用4xx和5xx作为错误页面的文件名来匹配这种类型的所有错误。
+
+​      可以从页面获取信息：timestamp    status   error  等等信息。用[[${}]]取出这些信息。
+
+​      没有放到模板引擎下而是放到静态资源文件夹下的话，也是能找到错误页面的，只是用${}取不出信息。
+
+​        都没有的话就是来到SpringBoot的默认错误页面。
+
+  2）如何定制json数据
+
+```java
+@ExceptionHandler(UserNotExistException.class)
+public String handleException(Exception e, HttpServletRequest request){
+ Map<String,Object> map = new HashMap<>();
+        //传入自己的错误状态码      request.setAttribute("javax.servlet.error.status_code",500);
+ map.put("user","user not exist");
+ map.put("message","用户出错了");
+ request.setAttribute("ext",map);
+ return "forward:/error";
+    }
+
+
+@Component
+public class MyErrorAttributes extends DefaultErrorAttributes {
+    @Override
+    public Map<String, Object> getErrorAttributes(WebRequest webRequest, boolean includeStackTrace) {
+        Map<String, Object> map = super.getErrorAttributes(webRequest, includeStackTrace);
+        map.put("company","com.janice");
+        Map<String,Object> ext = (Map<String,Object>)webRequest.getAttribute("ext", 0);
+        map.put("ext",ext);
+        return map;
+    }
+}
+```
+
+
+
+#### 配置嵌入式Servlet容器
+
+```java
+@Bean
+public WebServerFactoryCustomizer<ConfigurableServletWebServerFactory> customizer(){
+    return new WebServerFactoryCustomizer<ConfigurableServletWebServerFactory>() {
+        @Override
+        public void customize(ConfigurableServletWebServerFactory factory) {
+            factory.setPort(8083);
+        }
+    };
+}
+```
+
+
+
+#### 注册servlet三大组件【Servlet/Filter/Listener】
+
+由于SpringBoot默认是以jar包的方式启动嵌入式的Servlet容器来启动SpringBoot的web应用，没有web.xml。
+
+```java
+@Bean
+public ServletRegistrationBean myServlet(){
+  ServletRegistrationBean registrationBean = new ServletRegistrationBean(new MyServlet(),"/myServlet");
+        registrationBean.setLoadOnStartup(1);
+        return registrationBean;
+    }
+```
+
+```java
+@Bean
+public FilterRegistrationBean myFilter(){
+FilterRegistrationBean filterFilterRegistrationBean = new FilterRegistrationBean();
+filterFilterRegistrationBean.setFilter(new Myfilter());
+       filterFilterRegistrationBean.setUrlPatterns(Arrays.asList("/hello","/myServlet"));
+        return filterFilterRegistrationBean;
+    }
+```
+
+```java
+@Bean
+public ServletListenerRegistrationBean myListener(){
+ServletListenerRegistrationBean<MyListener> RegistrationBean = new ServletListenerRegistrationBean<>(new MyListener());
+        return RegistrationBean;
+    }
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
