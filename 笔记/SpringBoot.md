@@ -438,6 +438,8 @@ public class MyErrorAttributes extends DefaultErrorAttributes {
 }
 ```
 
+整个员工的增删改查代码位于：`spring-boot-04-web-restfulcrud`
+
 
 
 #### 配置嵌入式Servlet容器
@@ -489,19 +491,151 @@ ServletListenerRegistrationBean<MyListener> RegistrationBean = new ServletListen
 
 
 
+### SpringBoot数据访问
+
+application.yml:
+
+```java
+spring:
+  datasource:
+    username: root
+    password: admin
+    url: jdbc:mysql://ip地址:3306/jdbc
+    driver-class-name: com.mysql.cj.jdbc.Driver
+```
+
+提前运行docker上的mysql。
+
+准备一个sql文件，命名为schema-x.sql、data-x.sql，运行就能自动建表。
+
+如果是不想命名为schema-xxxx.sql，就在application.yml中指定sql文件：
+
+```java
+spring:
+  datasource:
+    username: root
+    password: admin
+    url: jdbc:mysql://ip地址:3306/jdbc
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    schema:
+      - classpath:department.sql
+    initialization-mode: always
+```
+
+#### 整合MyBatis
+
+##### 注解的方式：
+
+```java
+mapper/DepartmentMapper.java:
+@Mapper  //一定要将接口扫描到容器中
+public interface DepartmentMapper {
+    @Select("select * from department where id=#{id}")
+    public Department getDeptById(Integer id);
+
+    @Delete("delete from department where id=#{id}")
+    public int deleteDeptById(Integer id);
+
+    @Insert("insert into department(departmentName) values(#{departmentName})")
+    public int insertDept(Department department);
+
+    @Update("update department set departmentName=#{departmentName} where id = #{id}")
+    public int updateDept(Department department);
+}
+```
+
+上面的数据库中变量名为departmentName，和Department类中定义的属性名一样。如果将数据库变量名改为department_name，就会获取不到数据库中的数据，此时要再写个config文件来开启驼峰命名法：
+
+```java
+@org.springframework.context.annotation.Configuration
+public class MyBatisConfig {
+    @Bean
+    public ConfigurationCustomizer configurationCustomizer(){
+        return new ConfigurationCustomizer(){
+            @Override
+            public void customize(Configuration configuration) {
+                configuration.setMapUnderscoreToCamelCase(true);
+            }
+        };
+    }
+}
+```
+
+当mapper接口比较多的时候，不用在每个接口上都写@Mapper，而是直接去扫描mapper所在的包：
+
+```java
+@MapperScan(value = "com.janice.springboot.mapper")
+@SpringBootApplication
+public class SpringBoot06DataMybatisApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(SpringBoot06DataMybatisApplication.class, args);
+    }
+}
+```
+
+##### 配置文件的方式：
+
+在application.yml中：
+
+```yml
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
+```
+
+```xml
+<!--mapper文件夹下的文件-->
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.janice.springboot.mapper.EmployeeMapper">
+    <select id="getEmpById" resultType="com.janice.springboot.bean.Employee">
+        select * from employee where id=#{id}
+    </select>
+    
+    <insert id="insertEmp">
+        insert into employee(lastName,email,gender,d_id) values (#{lastName},#{email},#{gender},#{dId})
+    </insert>
+</mapper>
+```
+
+感觉还是注解方便些。
 
 
 
+#### 整合SpringData JPA
 
+JPA:ORM
 
+1.编写一个实体类 如User
 
+2.编写一个Dao接口来操作实体类对应的数据表
 
+```java
+public interface UserRepository extends JpaRepository<User,Integer> {
+}
+```
 
+3.在application.yml中配置数据库和jpaProperties：
 
+```xml
+spring:
+  datasource:
+    url: jdbc:mysql://47.114.156.203/jpa
+    username: root
+    password: admin
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
+  jpa:
+    hibernate:
+      ddl-auto: update
+  #控制台显示SQL
+    show-sql: true
+```
 
-
-
+**在controller中都不需要写方法，因为继承的JpaRepository里面就有各种增删改查方法。**
 
 
 
