@@ -173,3 +173,12 @@ service中能调用dao进行数据库的查询等操作就是整合成功。
 用户点击页面上的超链接，调用的是controller包下面的AccountController.java，里面调用了service方法，写一个Model model可以将查询到的结果存到域里面并在list.jsp中真的去获取数据并显示。service调用了dao进行数据库操作。
 
 代码位于`ssm`
+
+
+
+##### 后续自学补充
+
+@ResponseBody注解的作用是将controller层中的方法的返回值对象转换成相应的格式，然后将其写入到HttpServletResponse响应体中。使用此注解此次请求将不再走视图处理器，而是直接将此响应结果写入到输入流中，其效果等同于使用response对象输出指定格式的数据。
+
+
+
