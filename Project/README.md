@@ -1,7 +1,8 @@
 ## 简介
 前后端分离的一个项目————个人健康平台管理<br/>
 技术栈为SpringBoot+Vue+MyBatis+MySQL<br/>
-后端端口为9000 前端端口为8080
+后端端口为9000 前端端口为8080<br/>
+sportmanage是后端  sportplay是前端
 
 ## 启动
 前端：
