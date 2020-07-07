@@ -40,17 +40,31 @@ in等同于or       in(200,500)意思是等于200或者500
 
 ##### 排序
 
+ORDER BY 默认是升序
 
+asc是升序  desc是降序  select ename,sal from emp order by sal desc;//降序
 
+例子：按照工资降序排列，当工资相同时按照名字的升序：
 
+ select ename,sal from emp order by sal desc，ename asc;
 
+注意：越靠前的字段越能起到主导作用，只有当前面的字段无法完成排序的时候，才会启用后面的字段。
 
+**一条sql语句的执行顺序**   
 
+select *            3
 
+from table       1
 
+where 条件       2
 
+order by ...        4
 
+##### 分组
 
+**分组函数自动忽略null**    不需要在后面加上where xxx is not null;
+
+分组函数又叫多行处理函数    有sum()  count()  avg()
 
 
 
