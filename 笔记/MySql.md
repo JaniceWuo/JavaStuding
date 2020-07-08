@@ -44,7 +44,7 @@ ORDER BY 默认是升序
 
 asc是升序  desc是降序  select ename,sal from emp order by sal desc;//降序
 
-例子：按照工资降序排列，当工资相同时按照名字的升序：
+例子：**按照工资降序排列，当工资相同时按照名字的升序**：
 
  select ename,sal from emp order by sal desc，ename asc;
 
@@ -60,11 +60,93 @@ where 条件       2
 
 order by ...        4
 
-##### 分组
+##### 分组函数
 
 **分组函数自动忽略null**    不需要在后面加上where xxx is not null;
 
-分组函数又叫多行处理函数    有sum()  count()  avg()
+分组函数又叫多行处理函数    有sum()  count()  avg()   max()  min()
+
+group by:按照某个字段或者某些字段进行分组
+
+having: having是对分组之后的数据进行再次过滤  所以有group by才能用having
+
+分组函数一般都会和group by联合使用，这也是为什么它被称为分组函数的原因。
+
+当sql语句没有group by时，其实是缺省了。
+
+**任何一个分组函数都是在group by执行结束之后才执行**
+
+例：找出**每个**工作岗位的最高薪资：select max(sal),job from emp group by job;
+
+例：找出工资高于平均工资的员工。
+
+![image-20200708112031886](C:\Users\zhuowei\AppData\Roaming\Typora\typora-user-images\image-20200708112031886.png)
+
+**where后面不能直接用分组函数**   
+
+正确的sql：select ename,sal from emp where sal > (select avg(sal) from emp); 
+
+多个字段可以联合起来一块分组：
+
+例：找出每个部门不同工作岗位的最高薪资
+
+​      select deptno,job,max(sal) from emp group by deptno,job;
+
+例：找出每个部门的最高薪资，要求显示最高薪资大于2900的数据。
+
+有两种方法：
+
+1. select max(sal),deptno from emp group by deptno having max(sal) > 2900; //这种方法效率低
+
+​    2.select max(sal),deptno from emp where sal > 2900 group by deptno;
+
+但是where搞不定的就只能用having了
+
+ 
+
+#### 7/8
+
+##### 查询结果去重
+
+distinct只能出现在所有字段的最前面
+
+select distinct deptno,job from emp 是对deptno,job两个联合字段进行去重
+
+例：统计岗位的数量
+
+select count(distinct job) from emp;
+
+##### 连接查询
+
+实际开发一般都是多张表联合查询
+
+根据表的连接方式来划分，包括：
+
+​         内连接：等值连接   非等值连接    自连接
+
+​         外连接：左外连接   右外连接
+
+​         全连接 （很少用）
+
+笛卡尔积现象：当两张表进行连接查询的时候，没有任何条件进行限制，最终的查询结果条数是两张表记录条数的乘积。
+
+表的别名：select e.ename,d.dname from emp e,dept d;
+
+表的别名有什么好处？第一：执行效率高  第二：可读性好。
+
+如果不加别名的话，上面查询ename的时候会从emp和dept两张表里面找ename。
+
+怎么避免笛卡尔积现象？ 加条件进行过滤。 不会减少记录的匹配次数。
+
+
+
+
+
+
+
+
+
+
 
 
 
