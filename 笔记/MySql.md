@@ -138,11 +138,101 @@ select count(distinct job) from emp;
 
 怎么避免笛卡尔积现象？ 加条件进行过滤。 不会减少记录的匹配次数。
 
+##### 内连接
+
+A表和B表的数据匹配上就查  匹配不上就跳过  A表和B表时对等的。
+
+等值连接：
+
+select e.ename,d.dname from emp e join dept d on e.deptno = d.deptno;
+
+非等值连接：连接条件中的关系是非等量关系。
+
+select e.ename,e.sal,s.grade from emp e inner join salgrade s on e.sal between s.losal and s.hisal;
+
+自连接：一张表看做两张表 自己连接自己。
+
+案例：找出每个员工的上级领导，要求显示员工名和对应的领导名。
+
+select a.ename,b.ename from emp a join emp b on a.mgr = b.empno; 
+
+##### 外连接(使用更多)  使用外连接可以保证一张表的数据不丢失
+
+假设A和B表进行连接，使用外连接的话，AB两张表中有一张表是主表，一张表是副表，主要查询主表中的数据，捎带着查询副表。当副表中的数据没有和主表的数据匹配时，会自动模拟出Null值。
+
+案例：查每个员工的上级领导（要求查全部员工的  包含king的）
+
+用左连接： select a.ename,b.ename from emp a left join emp b on a.mgr = b.empno;
+
+用右连接：select a.ename,b.ename from emp b right join emp a on a.mgr = b.empno;
 
 
 
+#### 7/9
+
+##### 三张表怎么连接查询？
+
+案例：找出每一个员工的部门名称、工资等级、以及上级领导。
+
+select e.ename,d.dname,s.grade from emp e
+
+join dept d on e.deptno = d.deptno
+
+join salgrade s on e.sal between s.losal and s.hisal
+
+left join emp el on e.mgr = el.empno;
 
 
+
+##### union 可以将查询结果集相加
+
+两张表的查询结果列数要相同。
+
+
+
+#### 7/10
+
+limit是mysql特有的，其他数据库没有。
+
+语法：limit startIndex,length
+
+案例：取出工资最高的前5名员工
+
+select ename,sal from emp order by sal desc limit 0,5;
+
+注意下标从0开始
+
+每页显示pageSize条记录：第pageNo页：(pageNo - 1) * pageSize,pageSize
+
+##### 建表
+
+char和varchar的区别：char是定长 不智能   varchar可以动态的分配内存。
+
+char和varchar怎么选择？如果某个字段数据长度不发生改变，比如性别、生日都是选char；长度不确定如简介、姓名就用varchar。
+
+##### 约束
+
+添加约束的目的是为了保证表中的数据的合法性、有效性、完整性。
+
+常见的约束有：非空约束、唯一约束(unique)、主键约束、外键约束。
+
+唯一约束修饰的字段具有唯一性，不能重复，但可以为null。
+
+给两个列或者多个列添加unique: unique(usercode,username);
+
+外键约束：
+
+​     业务背景：设计数据表，维护学生和班级信息。
+
+​      最好设计成两张表：班级表和学生表，如果只设计一张表有冗余。
+
+​      一个班级里可以有多个学生，在学生表里加一个列class_id，将其和班级表的cid对应起来：
+
+​      foreign key (class_id) references classes (id);
+
+​      这样，在学生表插入数据的时候，如果class_id是班级表中不存在的cid，则插入失败。
+
+外键约束的列所引用的列不一定是主键，但要有**唯一性**。
 
 
 
