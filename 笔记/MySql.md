@@ -460,6 +460,8 @@ using join buffer 使用了连接缓存
 
 #### 优化
 
+##### 一张表的优化：
+
 例：查询category_id为1且comments大于1的情况下，views最多的article_id。
 
 如果建立索引时对三个字段一起创建一个复合索引，会导致using temporary的出现。因为comments是一个范围，mysql无法利用索引再对后面的views部分进行检索，即range类型查询字段后面的索引无效。
@@ -468,19 +470,51 @@ using join buffer 使用了连接缓存
 
 create index idx_article_cv on article(category_id,views);
 
+##### 两张表的优化：
+
+left join: 左表是全都有，关键在右表，所以要给右表建索引。
+
+right join:在左表建索引。
+
+##### 三张表的优化：
+
+永远用小结果集驱动大的结果集。比如书的类别class和书籍总数books，那就是class left join books。
 
 
 
+#### 索引优化
 
+1.最左前缀法则（最左前缀法则是指查询从索引的最左前列开始并且**不跳过索引中间的列**）
 
+例如，给三个字段建了联合索引(name,age,pos)，在查询数据库的时候如果没有用到name就会造成索引失效，此时会变成全表扫描。
 
+记住：**带头大哥不能死，中间兄弟不能断，永远遵守最佳左前缀**。
 
+2.在索引列上做了其他操作（计算，函数，自动或手动的类型转换），会导致索引失效
 
+3.使用了索引中范围条件右边的列。例如，where name='july' and age > 25 and pos='a'; 这里pos是用不到的。**范围之后全失效**
 
+4.尽量使用覆盖索引（建的索引列和查询列一致），避免使用select *。
 
+5.！=  和<>都会导致索引失效。但是这要根据业务需求来定，不能因为索引失效就不用！=。
 
+6.is null和is not null也无法使用索引
 
+7.like以通配符开头('%abc...') 会索引失效变成全表扫描。**%最好加在右边**，才能避免索引失效，例如'july%'。
 
+##### 问：怎样在不得不使用'%...%'的情况下还索引不失效？
+
+​     使用覆盖索引。就是select后面的字段不能有没加索引的字段，更不能直接用select *。例如只给name,pos加了索引，结果查的时候写的是select name,pos,email from...where name like '%aa%' 这时候就索引失效了，因为用到了没加索引的email。
+
+8.字符串不加单引号索引失效。varchar类型绝对不能失去单引号。
+
+例如name是varchar类型，如果写的是where name = 2000  会导致索引失效，变成全表扫描。因为mysql会自动将2000转换为'2000'。
+
+9.少用or，用它来连接时会索引失效。
+
+##### 索引小结
+
+![image-20200721132409445](C:\Users\zhuowei\AppData\Roaming\Typora\typora-user-images\image-20200721132409445.png)
 
 
 
@@ -536,9 +570,29 @@ select sal from emp where sal not in (select distinct a.sal from emp a join emp 
 
 
 
+#### MySQL锁
 
+#### 锁的分类：
 
+##### 从对数据操作的类型来分类：读锁和写锁。
 
+读锁（共享锁）:针对同一份数据，多个读操作可以同时进行而不会互相影响。
+
+写锁（排它锁）：当前写操作没有完成前，它会阻断其他写锁和读锁。
+
+##### 从对数据操作的粒度来分类：表锁（偏读）和行锁（偏写）。
+
+##### 表锁：
+
+偏向MyISAM引擎，开销小，加锁快；无死锁；锁定粒度大，发生锁冲突的概率最高，并发度最低。
+
+锁表：lock table 表名 read/write。
+
+释放锁：unlock table 表名;
+
+session1如果给mylock表加了read锁，可以读mylock，不能写mylock，也不能读别的表。
+
+session2连接mysql后，可以读mylock表，也可以读或者写其他的表，但是要对mylock表进行update操作时会进入阻塞，只有在session1中对mylock表进行unlock后，session2才能update。
 
 
 
