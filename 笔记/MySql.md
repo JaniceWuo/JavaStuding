@@ -336,6 +336,10 @@ create index 索引名称 on 表名(字段名)
 
 drop index 索引名称 on 表名；
 
+##### 查看索引：
+
+show index from 表;
+
 ##### 索引底层采用的数据结构是：b+树
 
 ##### 索引的实现原理？
@@ -363,6 +367,118 @@ b+树：
 非叶子节点不存储真实的数据，只存储指引搜索方向的数据项。
 
 3层的b+树可以表示上百万的数据，如果上百万的数据查找只需要三次IO，性能提高将是巨大的，如果没有索引，每个数据项都要发生一次IO，那么总共需要百万次的IO，显然成本非常非常高。
+
+##### 哪些情况需要创建索引？
+
+1.主键自动建立唯一索引
+
+2.频繁作为查询条件的字段应该创建索引
+
+3.外键关系建立索引
+
+4.查询中排序的字段，排序字段若通过索引去访问将大大提高排序速度
+
+##### 哪些情况不要建索引？
+
+1.表记录太少
+
+2.经常增删改的表
+
+3.如果某个数据列包含很多重复的内容，就没必要为它建立索引
+
+
+
+##### Explain
+
+explain + sql语句
+
+![image-20200720130943450](C:\Users\zhuowei\AppData\Roaming\Typora\typora-user-images\image-20200720130943450.png)
+
+##### id
+
+如果相同，可以认为是一组，从上往下按顺序执行。如果不同，id大的先执行。
+
+##### select_type:
+
+有simple、primary、subquery、derived、union、union result。
+
+table：显示这一行数据是哪张表的。
+
+##### type:
+
+![image-20200720132330483](C:\Users\zhuowei\AppData\Roaming\Typora\typora-user-images\image-20200720132330483.png)
+
+从最好到最差依次是：system>const>eq_ref>ref>range>index>ALL
+
+   ALL表示是全表扫描，是最差的。百万级别的数据一定要建索引进行优化。
+
+  system：表只有一行记录（等于系统表）  平时不会出现，忽略不计。
+
+   const：表示通过索引一次就找到了，所以很快。
+
+​    eq_ref:唯一性索引扫描，对于每个索引键，表中只有一条记录与之匹配。常见于主键或唯一索引扫描。
+
+​    ref:非唯一性索引扫描，返回匹配某个单独值的所有行。
+
+​    range:只检索给定范围的行。比全表扫描好。是where语句中出现了between,<,>,in等查询。
+
+​     index:full index scan 全索引扫描,与ALL的区别是index只扫描索引树。
+
+#####     一般来说，至少要到达range，最好到ref。
+
+##### possible_keys:
+
+显示可能应用在这张表中的索引，一个或多个。查询涉及到的字段上若存在索引，则该索引将被列出，但不一定被查询实际使用。
+
+##### key:
+
+实际使用的索引，如果为null，则表示没有使用索引。
+
+##### key_len:
+
+表示索引中使用的字节数，是索引字段的最大可能长度，并非实际使用长度。同样查询精度的情况下，key_len越小越好。
+
+##### ref:
+
+显示索引的哪一列被使用了。
+
+##### rows:
+
+根据表统计信息及索引选用情况，大致估算出找到所需记录所需读取的行数。rows越少越好。
+
+##### extra:
+
+using filesort 说明mysql会对数据使用一个外部的索引排序，而不是按照表内的索引顺序进行读取。不好。
+
+using temporary 说明使用了临时表来保存中间结果，常见于排序order by 和 分组查询group by。 很伤性能，不好。
+
+using index  好。
+
+using where 表示使用了where 
+
+using join buffer 使用了连接缓存
+
+#### 优化
+
+例：查询category_id为1且comments大于1的情况下，views最多的article_id。
+
+如果建立索引时对三个字段一起创建一个复合索引，会导致using temporary的出现。因为comments是一个范围，mysql无法利用索引再对后面的views部分进行检索，即range类型查询字段后面的索引无效。
+
+此题更好的的创建索引：
+
+create index idx_article_cv on article(category_id,views);
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -404,7 +520,17 @@ select sal from emp where sal not in (select distinct a.sal from emp a join emp 
 
 
 
+#### 范式
 
+1NF 2NF 3NF BC等
+
+关系数据库中的关系必须满足一定的要求，满足不同程度要求的为不同的范式。
+
+1NF：第一范式，每个属性都不可再分。第一范式是对关系模式的最起码的要求。
+
+2NF：第二范式。
+
+3NF：第三范式。
 
 
 
