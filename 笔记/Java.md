@@ -50,11 +50,67 @@ fr.close();
 -  如果hashcode不一样，就是在**不同的坑里**，一定是不重复的
 - 如果hashcode一样，就是在**同一个坑里**，还需要进行equals比较（如果equals一样，则是重复数据，不一样就是不同数据）。
 
-##### 11.泛型` <? extends Hero>`是只能取不能加，因为加的话不确定到底是Hero类还是它的子类；
+##### 11.泛型
+
+java中的泛型是伪泛型，是通过泛型的类型擦除实现的，如果没有上下界就会转化成Object，例如List<Integer>被擦除后类型变为Object，而List<T extends Comparable>被擦除后变为Comparable。取的时候再强制转化成原本的类型。
+
+泛型的参数类型只能是类，例如List<Integer> 不能是简单类型，例如List<int>
+
+##### 泛型` <? extends Hero>`是只能取不能加，因为加的话不确定到底是Hero类还是它的子类；
 
 ##### ` <? super Hero>`是只能加不能取，因为取的话如果取的是Object，就会强转成Hero失败。
 
 ##### 子类泛型不能转换为父类泛型，父类泛型也不能转换为子类泛型。
+
+##### 含有泛型的方法：
+
+##### 修饰符 <泛型> 返回值类型  方法名(参数列表（使用泛型)){
+
+​       方法体；
+
+##### }
+
+##### 泛型通配符
+
+传递的数据中，泛型类型不确定时可以使用通配符<?>表示。
+
+##### 泛型擦除
+
+泛型擦除是泛型信息在源代码里面有，而在生成的字节码里面就没有了。怎么来证明的确在编译后泛型被擦除掉了呢？
+
+```java
+public class Test {
+
+    public static void main(String[] args) throws Exception {
+
+        ArrayList<Integer> list = new ArrayList<Integer>();
+
+        list.add(1);  //这样调用 add 方法只能存储整形，因为泛型类型的实例为 Integer
+
+        list.getClass().getMethod("add", Object.class).invoke(list, "asd");
+
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(list.get(i));
+        }
+    }
+
+}
+```
+
+通过反射调用add方法可以存储字符串，说明被擦除掉了。
+
+##### 问：既然类型变量在编译时会被擦除掉，那么为什么不能往<Integer>中加String类型的数呢？
+
+因为java编译器是先检查代码中泛型的类型，再进行类型擦除，再编译。而且类型检查是针对引用的，无关它真正引用的对象：
+
+```java
+ArrayList list1 = new ArrayList<String>(  );
+list1.add( "1" );
+list1.add( 1 );
+//都编译通过
+```
+
+
 
 ##### 12.运行时异常和非运行时异常的区别。
 
