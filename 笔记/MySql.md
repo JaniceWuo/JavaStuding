@@ -80,7 +80,7 @@ having: having是对分组之后的数据进行再次过滤  所以有group by�
 
 例：找出工资高于平均工资的员工。
 
-![image-20200708112031886](C:\Users\zhuowei\AppData\Roaming\Typora\typora-user-images\image-20200708112031886.png)
+![image-20200708112031886](img/image-20200708112031886.png)
 
 **where后面不能直接用分组函数**   
 
@@ -392,7 +392,7 @@ b+树：
 
 explain + sql语句
 
-![image-20200720130943450](C:\Users\zhuowei\AppData\Roaming\Typora\typora-user-images\image-20200720130943450.png)
+![image-20200720130943450](img/image-20200720130943450.png)
 
 ##### id
 
@@ -406,7 +406,7 @@ table：显示这一行数据是哪张表的。
 
 ##### type:
 
-![image-20200720132330483](C:\Users\zhuowei\AppData\Roaming\Typora\typora-user-images\image-20200720132330483.png)
+![image-20200720132330483](img/image-20200720132330483.png)
 
 从最好到最差依次是：system>const>eq_ref>ref>range>index>ALL
 
@@ -514,7 +514,7 @@ right join:在左表建索引。
 
 ##### 索引小结
 
-![image-20200721132409445](C:\Users\zhuowei\AppData\Roaming\Typora\typora-user-images\image-20200721132409445.png)
+![image-20200721132409445](img/image-20200721132409445.png)
 
 
 
