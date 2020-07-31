@@ -1,0 +1,16 @@
+server:
+  port: 8086
+spring:
+  application:
+    name: sms-service
+  rabbitmq:
+    host: 127.0.0.1
+    virtual-host: /janice
+    username: janice
+    password: janice
+leyou:
+  sms:
+    accessKeyId: LTAI4GK7jUDrLmWNCdoFK2pd
+    accessKeySecret: D2ZC77xF62s29jeMW1k6aklw9CAbKr
+    signName: 乐优商城    # 签名名称
+    verifyCodeTemplate: SMS_197885441    # 模板名称
