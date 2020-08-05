@@ -359,3 +359,97 @@ spring基于纯注解：test.java中的@ContextConfiguration内容要改成class
 
 （因为把@ComponentScan写成了@Component导致找不到IAccountService类的bean对象....又找错找了半个小时！！！）
 
+
+
+
+
+#### 8/5  
+
+开始学习Spring源码  :fist_oncoming:
+
+##### 注解方式：
+
+@Bean == 之前xml里面写的bean标签
+
+需要有个配置类config来代替之前的xml。
+
+@ComponentScan 指定要扫描的包
+
+
+
+在Ioc中默认是单例。无论获取多少次，都是同一个对象。
+
+prototype是多实例的，singleton是单实例（默认）
+
+@Scope("prototype")就是指定为多实例。
+
+singleton:ioc容器启动时会调用方法创建对象放到ioc容器中，以后每次获取就是直接从容器(map.get())中拿。
+
+prototype:ioc容器启动时并不会调用方法创建对象放在容器中，而是每次获取的时候才会调用方法创建对象，所以每次获取的对象都不同。
+
+
+
+##### 懒加载
+
+是针对单实例bean的。
+
+懒加载，容器启动不创建对象，第一次使用时才创建对象并初始化。
+
+在config配置类上面加上@Lazy。
+
+
+
+@Conditional 按照条件注册bean
+
+@FactoryBean  默认获取的是工厂bean调用getObject创建的对象，如果要获取工厂bean本身，需要给id前面加一个&。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
