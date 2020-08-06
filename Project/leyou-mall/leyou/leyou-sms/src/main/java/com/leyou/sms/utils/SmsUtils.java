@@ -32,7 +32,6 @@ public class SmsUtils {
 
     public void sendSms(String phone, String templateCode, String signName, String verifyCode ) {
         DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", prop.getAccessKeyId(), prop.getAccessKeySecret());
-//        DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", "LTAI4GK7jUDrLmWNCdoFK2pd", "D2ZC77xF62s29jeMW1k6aklw9CAbKr");
         IAcsClient acsClient = new DefaultAcsClient( profile );
         CommonRequest request = new CommonRequest();
 
