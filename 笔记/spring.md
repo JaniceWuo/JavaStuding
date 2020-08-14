@@ -387,6 +387,16 @@ singleton:ioc容器启动时会调用方法创建对象放到ioc容器中，以�
 
 prototype:ioc容器启动时并不会调用方法创建对象放在容器中，而是每次获取的时候才会调用方法创建对象，所以每次获取的对象都不同。
 
+##### @Conditional
+
+按照一定的条件进行判断 满足条件给容器中注册bean
+
+
+
+
+
+
+
 
 
 ##### 懒加载
@@ -405,25 +415,56 @@ prototype:ioc容器启动时并不会调用方法创建对象放在容器中，�
 
 
 
+##### Bean的生命周期
+
+指的是bean创建—>初始化—>销毁的过程
+
+也可以自定义初始化和销毁方法：
+
+   1. 通过配置文件。 <bean ..... init-method = " "  destroy-method="">
+
+   2. 通过注解。@Bean(init-method=自己定义的init方法，destroy-method=自己定义的销毁方法)
+
+      （注意 如果是多实例  那就算容器关闭，bean也不会销毁）
+
+​       可以使用JSR250: @PostConstruct   @PreDestroy
+
+​       让Bean实现InitializationBean    DisposableBean
+
+​       实现BeanPostProcessor接口的postProcessBeforeInitialization和postProcessAfterInitialization
 
 
 
+##### @Value
+
+赋值：基本数值  可以写SpEL#{}  可以写${}
+
+如果要获取配置文件中的值 还要额外通过指定@PropertySource来
 
 
 
+##### 自动装配
+
+Spring利用依赖注入 完成对IOC容器中各个组件的依赖关系赋值
+
+@Autowired 注解是优先按照类型来找 如果找到多个 那就按照属性名去找 比如说BookDao bookDao 就相当于调用了applicationContext.getBean("bookDao")
+
+但是如果就想指定id 就使用@Qualifire("bookDao2")来指定找bookDao2这个id的bean。
+
+如果找不到一个bean的话，会报错。为了不报错，可以指定@Autowired(required=false)表示非必须找到。
+
+还可以用@Resource来注入，它是默认按照名称来注入的。比如说：
+
+```java
+@Resource
+private BookDao bookDao;
+```
+
+那么就会注入@Bean(bookDao)，就算bookDao2设置了@Primary也无济于事。但是可以@Resource(name = "bookDao2")。
 
 
 
-
-
-
-
-
-
-
-
-
-
+@Autowired可以标注在构造器、参数、方法、属性上。
 
 
 
