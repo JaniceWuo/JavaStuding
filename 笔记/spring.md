@@ -391,11 +391,13 @@ prototype:ioc容器启动时并不会调用方法创建对象放在容器中，�
 
 按照一定的条件进行判断 满足条件给容器中注册bean
 
+要写几个java类实现Condition接口  来作为不同的条件
 
+然后在方法或者类上加上@Condition({条件.class})   就可以满足此条件的才注册组件
 
+##### @Import
 
-
-
+快速给容器中导入一个组件
 
 
 
@@ -431,7 +433,7 @@ prototype:ioc容器启动时并不会调用方法创建对象放在容器中，�
 
 ​       让Bean实现InitializationBean    DisposableBean
 
-​       实现BeanPostProcessor接口的postProcessBeforeInitialization和postProcessAfterInitialization
+​       实现BeanPostProcessor（后置处理器）接口的postProcessBeforeInitialization和postProcessAfterInitialization
 
 
 
@@ -465,6 +467,73 @@ private BookDao bookDao;
 
 
 @Autowired可以标注在构造器、参数、方法、属性上。
+
+
+
+
+
+#### AOP
+
+指在程序运行期间动态的将某段代码切入到指定方法指定位置进行运行的编程模式。
+
+涉及的设计模式就是代理模式。
+
+通知：前置、后置、返回@AfterReturning、异常@AfterThrowing、环绕通知@Around
+
+抽取公共的切入点表达式：
+
+```java
+@Pointcut("execution(目标方法的全类名)")
+public void pointcut(){}
+```
+
+给配置类加上@EnableAspectJAutoProxy【开启基于注解的aop模式】
+
+要给切面类加上@Aspect注解 告诉Spring当前类是一个切面类  就是里面写了前置通知后置通知等方法的类。
+
+##### AOP原理
+
+先研究@EnableAspectJAutoProxy这个注解
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -118,6 +118,146 @@ list1.add( 1 );
 
 
 
+#### 内部类
+
+分类：1. 成员内部类  2.局部内部类（包含匿名内部类）
+
+内部访问外部的变量，是随意访问；外部要访问内部，需要内部类对象。
+
+#### 成员内部类
+
+使用成员内部类有两种方式：
+
+1.间接。外部类的方法中使用内部类，然后Main调用外部类的方法。
+
+2.直接。外部类名称.内部类名称 对象名 = new 外部类名称().new 内部类名称()；
+
+比如说外部类是Body 里面有个成员内部类Heart  那直接方式是Body.Heart heart = new Body().new Heart(); 然后通过heart可以调用Heart的方法。
+
+##### 变量重名
+
+![image-20200816174120161](./img/image-20200816174120161.png)
+
+methodInner()的输出依次为30  20  10。
+
+#### 局部内部类
+
+这个类是定义在一个方法内部的。
+
+局部内部类只能所在的方法能调用：
+
+```java
+class Outer{
+    public void methodOuter(){
+        class Inner{ //局部内部类  不能写修饰符
+            int num = 10;
+            public void methodInner(){
+                System.out.println(num);  //10
+            }
+        }
+        Inner inner = new Inner();
+        inner.methodInner();
+    }
+}
+public class Demo{
+    public static void main(String[] args){
+        Outer outer = new Outer();
+        outer.methodOuter();  //成功输出10
+    }
+}
+```
+
+注意：若局部内部类想访问所在方法的局部变量，那么这个局部变量必须是有效final的。（从java8开始不加final也行，但要保证是不变的)
+
+```java
+class Outer{
+    public void methodOuter(){
+        int num = 20;  //所在的方法有一个局部变量num
+        //num = 10;  加这句会报错  num不能变
+        class Inner{ //局部内部类 
+            public void methodInner(){
+                System.out.println(num);  //可以访问  为20
+            }
+        }
+        Inner inner = new Inner();
+        inner.methodInner();
+    }
+}
+```
+
+上述的原理：
+
+因为局部变量是跟着方法走的，是在栈内存中。而new出来的对象在堆当中持续存在直到垃圾回收消失。所以这个methodOuter方法完成后，其局部变量num就立刻消失了，但是inner对象可能还活着，它还要继续调用num，就得保证这个num是唯一不变的，才能继续使用这个“常量”。
+
+##### 小结类的权限修饰符：
+
+外部类：public/default
+
+成员内部类：public/protected/(default)/private
+
+局部内部类：什么都不能写
+
+#### 匿名内部类（重要）
+
+定义格式：
+
+接口名 对象名 = new 接口名(){
+
+​        //覆盖重写所有的抽象方法
+
+}
+
+当接口的实现类只需要使用一次的时候，使用匿名内部类就可以不用`重新定义一个实现类.java并且重写接口中的方法了`。
+
+匿名内部类和匿名对象不是一回事。
+
+
+
+#### toString和equals方法
+
+Object的toString()方法，获取的就是对象的地址值，和直接打印对象名输出结果一样。
+
+直接输出地址是无意义的，所以一般都会去重写toString方法。
+
+如果重写了，那么再打印对象的名字，输出的就是我们重写的。
+
+java中Scanner、ArrayList都重写了toString()。
+
+##### Object的equals()：
+
+Person p1 = new Person(....)
+
+Person p2 = new Person(...)
+
+p1.equals(p2)   //输出为false
+
+查看equals源码：
+
+```java
+//Object中的equals:
+public boolean equals(Object obj) {
+    return (this == obj);
+}
+//this就是谁调用了这个方法就指的是谁  这里指的是p1
+//而== 如果是引用类型，则比较的是地址值
+```
+
+比较两个对象的地址值一般也没啥意义，所以我们需要重写equals方法，去比较属性值是否一样。
+
+String类是重写了equals()方法了的。
+
+
+
+#### 序列化与反序列化
+
+把对象以流的方式写入到文件中保存，叫写对象，也叫对象的序列化。
+
+把文件中的内容读出来重建对象，叫读对象，也叫对象的反序列化。
+
+要进行序列化和反序列化的类必须实现Serializable接口。
+
+
+
 ------
 
 ### 2020.5.6
