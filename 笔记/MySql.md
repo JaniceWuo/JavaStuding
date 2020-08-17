@@ -612,11 +612,15 @@ session2连接mysql后，可以读mylock表，也可以读或者写其他的表�
 
 
 
+#### Truncate与delete的区别
 
+truncate table：只能删除表中全部数据
 
+delete from table where……，可以删除表中全部数据，也可以删除部分数据。
 
+truncate的执行速度比delete快。
 
-
+delete执行后，删除的数据占用的存储空间还在，还可以恢复数据；truncate删除的数据占用的存储空间不在，不可以恢复数据。也因此truncate 删除后，不能回滚，delete可以回滚。
 
 
 
