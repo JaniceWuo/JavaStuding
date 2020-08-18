@@ -200,7 +200,7 @@ limit是mysql特有的，其他数据库没有。
 
 select ename,sal from emp order by sal desc limit 0,5;
 
-注意下标从0开始
+**注意下标从0开始**
 
 每页显示pageSize条记录：第pageNo页：(pageNo - 1) * pageSize,pageSize
 
