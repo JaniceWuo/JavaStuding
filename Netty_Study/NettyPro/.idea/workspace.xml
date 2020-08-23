@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b4b185f9-da4e-4da0-87d7-f9d49d9ae74d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/Net/FileUpload/TCPClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/Net/FileUpload/TCPServer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/Net/TCPClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/Net/TCPServer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/atguigu/bio/BIOServer$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/atguigu/bio/BIOServer$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/atguigu/bio/BIOServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/atguigu/bio/BIOServer.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -18,10 +19,22 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/test/java/Algorithm/Main2.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/Net/FileUpload/TCPClient.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-33">
-              <caret line="21" column="33" selection-start-line="21" selection-start-column="33" selection-end-line="21" selection-end-column="33" />
+            <state relative-caret-position="414">
+              <caret line="21" column="32" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/Net/FileUpload/TCPServer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="20" column="63" selection-start-line="20" selection-start-column="63" selection-end-line="20" selection-end-column="63" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -56,6 +69,10 @@
         <option value="$PROJECT_DIR$/src/test/java/Algorithm/Main3.java" />
         <option value="$PROJECT_DIR$/src/test/java/Algorithm/Main5.java" />
         <option value="$PROJECT_DIR$/src/test/java/Algorithm/Main2.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/Net/TCPServer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/Net/TCPClient.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/Net/FileUpload/TCPServer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/Net/FileUpload/TCPClient.java" />
       </list>
     </option>
   </component>
@@ -77,9 +94,9 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="827" />
-    <option name="width" value="1742" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="1272" />
+    <option name="width" value="1297" />
     <option name="height" value="1398" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -88,7 +105,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -118,6 +134,42 @@
               <item name="NettyPro" type="b2602c69:ProjectViewProjectNode" />
               <item name="NettyPro" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="NettyPro" type="b2602c69:ProjectViewProjectNode" />
+              <item name="NettyPro" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="bio" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="NettyPro" type="b2602c69:ProjectViewProjectNode" />
+              <item name="NettyPro" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="Net" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="NettyPro" type="b2602c69:ProjectViewProjectNode" />
+              <item name="NettyPro" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="Net" type="462c0819:PsiDirectoryNode" />
+              <item name="FileUpload" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="NettyPro" type="b2602c69:ProjectViewProjectNode" />
+              <item name="NettyPro" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -126,27 +178,20 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="NettyPro" type="b2602c69:ProjectViewProjectNode" />
-              <item name="NettyPro" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="Algorithm" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1597155006715" />
-    <property name="last_opened_file_path" value="E:/设计模式/源码笔记课件/代码" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1598190477017" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -162,20 +207,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Main2">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Algorithm.Main" />
-      <module name="NettyPro" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Algorithm.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="Application.TCPClient (1)">
     <configuration name="Main2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Algorithm.Main2" />
       <module name="NettyPro" />
@@ -189,12 +221,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Main3" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Algorithm.Main3" />
+    <configuration name="TCPClient (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.Net.FileUpload.TCPClient" />
       <module name="NettyPro" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Algorithm.*" />
+          <option name="PATTERN" value="com.Net.FileUpload.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -202,12 +234,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Main4" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Algorithm.Main4" />
+    <configuration name="TCPClient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.Net.TCPClient" />
       <module name="NettyPro" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Algorithm.*" />
+          <option name="PATTERN" value="com.Net.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -215,12 +247,25 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Main5" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Algorithm.Main5" />
+    <configuration name="TCPServer (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.Net.FileUpload.TCPServer" />
       <module name="NettyPro" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Algorithm.*" />
+          <option name="PATTERN" value="com.Net.FileUpload.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TCPServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.Net.TCPServer" />
+      <module name="NettyPro" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.Net.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -292,11 +337,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.TCPClient (1)" />
+        <item itemvalue="Application.TCPServer (1)" />
+        <item itemvalue="Application.TCPClient" />
+        <item itemvalue="Application.TCPServer" />
         <item itemvalue="Application.Main2" />
-        <item itemvalue="Application.Main5" />
-        <item itemvalue="Application.Main4" />
-        <item itemvalue="Application.Main3" />
-        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -312,16 +357,18 @@
       <updated>1594888033279</updated>
       <workItem from="1594888036482" duration="4020000" />
       <workItem from="1596264535167" duration="20246000" />
+      <workItem from="1598185778319" duration="3528000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24266000" />
+    <option name="totallyTimeSpent" value="27794000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="662" y="0" width="1393" height="1118" extended-state="1" />
+    <frame x="1018" y="0" width="1037" height="1118" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17977528" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22982635" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -330,7 +377,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3306288" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3306288" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3995943" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -347,7 +394,7 @@
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="right" id="Database" order="4" />
       <window_info anchor="right" id="Theme Preview" order="5" />
-      <window_info anchor="right" id="Maven" order="6" visible="true" weight="0.034456927" />
+      <window_info anchor="right" id="Maven" order="6" visible="true" weight="0.04698672" />
       <window_info anchor="right" id="Capture Analysis" order="7" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
     </layout>
@@ -358,16 +405,6 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/atguigu/bio/BIOServer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="667">
-          <caret line="31" column="13" lean-forward="true" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/src.zip!/java/lang/Object.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -532,8 +569,65 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/Algorithm/Main2.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-33">
-          <caret line="21" column="33" selection-start-line="21" selection-start-column="33" selection-end-line="21" selection-end-column="33" />
+        <state relative-caret-position="391">
+          <caret line="35" column="20" lean-forward="true" selection-start-line="35" selection-start-column="20" selection-end-line="35" selection-end-column="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/atguigu/bio/BIOServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="621">
+          <caret line="31" column="13" lean-forward="true" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/src.zip!/com/sun/org/apache/xpath/internal/operations/String.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/Net/TCPServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="18" column="23" lean-forward="true" selection-start-line="18" selection-start-column="23" selection-end-line="18" selection-end-column="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/Net/TCPClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="16" column="44" lean-forward="true" selection-start-line="16" selection-start-column="44" selection-end-line="16" selection-end-column="44" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/Net/FileUpload/TCPServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="20" column="63" selection-start-line="20" selection-start-column="63" selection-end-line="20" selection-end-column="63" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/Net/FileUpload/TCPClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="21" column="32" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
