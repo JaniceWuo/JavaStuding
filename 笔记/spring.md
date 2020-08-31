@@ -468,7 +468,9 @@ private BookDao bookDao;
 
 @Autowired可以标注在构造器、参数、方法、属性上。
 
+接口上不加注解，因为不需要将接口加在容器中。
 
+要记住Ioc中保存的是代理对象。
 
 
 
@@ -476,7 +478,7 @@ private BookDao bookDao;
 
 指在程序运行期间动态的将某段代码切入到指定方法指定位置进行运行的编程模式。
 
-涉及的设计模式就是代理模式。
+涉及的设计模式就是**代理模式**。
 
 通知：前置、后置、返回@AfterReturning、异常@AfterThrowing、环绕通知@Around
 
@@ -491,11 +493,29 @@ public void pointcut(){}
 
 要给切面类加上@Aspect注解 告诉Spring当前类是一个切面类  就是里面写了前置通知后置通知等方法的类。
 
+
+
 ##### AOP原理
 
 先研究@EnableAspectJAutoProxy这个注解
 
 
+
+
+
+##### 事务细节
+
+isolation  是Isolation类型   ： 事务的隔离级别
+
+propagation 是Propagation类型 ： 事务的传播行为
+
+noRollbackFor  Class[]   哪些异常事务可以不回滚
+
+noRollbackForClassName  String[]
+
+rollbackFor  Class[]       哪些异常事务需要回滚
+
+rollbackForClassName  String[ ]
 
 
 
