@@ -89,9 +89,9 @@ public interface IUserDao {
 
 要按照规范一一对应：
 
-![](img\image-20210811170350529.png)
+![](img/image-20210811170350529.png)
 
-![](img\image-20210811170229557.png)
+![](img/image-20210811170229557.png)
 
 面向接口编程的代码见`E:\JavaStuding\Mybatis\day_01\day01_01mybatis`（理解并记住）:accept:
 
