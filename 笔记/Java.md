@@ -207,6 +207,40 @@ class Outer{
 
 }
 
+<<<<<<< Updated upstream
+=======
+```java
+public class Outer3 {
+    /**
+     * 匿名内部类  必须要重写接口或者类里面的方法
+     */
+    public void method(){
+        //两种调用方法
+        new Inter(){
+            @Override
+            public void show() {
+                System.out.println("我是匿名内部类");
+            }
+        }.show();
+        
+        Inter inter = new Inter() {
+            @Override
+            public void show() {
+                System.out.println("我是匿名内部类");
+            }
+        };
+        inter.show();
+
+    }
+
+}
+
+public interface Inter {
+    void show();
+}
+```
+
+>>>>>>> Stashed changes
 当接口的实现类只需要使用一次的时候，使用匿名内部类就可以不用`重新定义一个实现类.java并且重写接口中的方法了`。
 
 匿名内部类和匿名对象不是一回事。

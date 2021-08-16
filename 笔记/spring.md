@@ -106,6 +106,12 @@ AnnotationConfigApplicationContext 用于读取注释创建容器。
 
 ​         死亡：当对象长时间不用且没有别的对象引用时，由java的垃圾回收机制回收
 
+配置一个User对象：
+
+`<bean id="user" class="com...."></bean>`
+
+其中id属性是唯一标识，class属性是类全路径。
+
 
 
 ##### 依赖注入：
@@ -132,15 +138,15 @@ AnnotationConfigApplicationContext 用于读取注释创建容器。
 
 ##### spring注解：
 
-注入对象的：
+注入对象的：（以下四个功能是一样的，都是代表将类注册到Spring容器中装配）
 
-​      Component:用于把当前对象存入spring容器中，如果没有设置value那就是默认为`类名的首字母改小写`
+​      ①Component:用于把当前对象存入spring容器中，如果没有设置value那就是默认为`类名的首字母改小写`
 
-​       Controller:一般用在表现层
+​       ②Controller:一般用在表现层
 
-​       Service:一般用在业务层(Service)
+​       ③Service:一般用在业务层(Service)
 
-​       Repository:一般用于持久层（Dao）
+​       ④Repository:一般用于持久层（Dao）
 
 注入数据的：
 
@@ -160,13 +166,17 @@ AnnotationConfigApplicationContext 用于读取注释创建容器。
 
 <bean id = "随便取" class = "一般是一个impl">
 
-<property name = "这个是类里面的方法去掉set后的首字母改小写" ref = "定义的另外一个bean的id"></property>
+<property name = "" ref = "要引用的bean的id"></property>
 
 </bean>
 
 用到了QueryRunner,在bean.xml中也要对其进行配置，并且设置成prototype。
 
 代码位于Spring_study/spring_day02anno_xmlioc
+
+
+
+如果采用的是xml的方式，那么set方法不能省略。如果是注解的方式，那么可以省略。
 
 
 
@@ -186,7 +196,7 @@ AnnotationConfigApplicationContext 用于读取注释创建容器。
 
 ##### spring的新注解
 
-Configuration  指定当前类是一个配置类  
+Configuration  指定当前类是Spring的核心配置类  
 
 ComponentScan  用于通过注解指定spring在创建容器时要扫描的包
 
@@ -212,7 +222,7 @@ PropertySource  用于指定properties文件的位置
 
 代码位于day03_01account
 
-##### 动态代理：不改变源代码的基础上对已有方法增强
+##### 动态代理：不改变源代码的基础上对已有方法增强（代理的是接口）
 
 特点：字节码随用随创建，随用随加载
 
@@ -248,23 +258,51 @@ PropertySource  用于指定properties文件的位置
 
 aop:before  表示配置前置通知
 
-​        method属性:用于指定Logger类中的哪个方法是前置通知
+​        `method`属性:用于指定你要切入的方法
 
-​        pointcut属性:用于指定切入点表达式，该表达式的含义指的是对业务层中哪些方法增强。
+​        `pointcut`属性:用于指定切入点表达式，该表达式的含义指的是对业务层中哪些方法增强。
 
-​        切入点表达式写法：
+ 切入点表达式写法：`execution([修饰符] 返回值类型 包名.类名.方法名(参数))`
 
-​         关键字：execution(表达式)
+​        可以使用通配符*代表任意
 
-​         表达式可以使用通配符*
+​        包名与类名之间一个点，表示当前包下的类，两个点表示当前包及其子包下的类。
+
+​        参数列表可以使用两个点..表示任意个数、任意类型的参数列表。
+
+​         
 
 spring的环绕通知:
 
 ​          它是spring框架为我们提供的一种可以在代码中手动控制增强方法何时执行的方式。
 
+写aop代码，要有目标对象、切面对象（其实就是一个类），然后配置织入。
+
+
+
+### 基于XML的AOP开发：
+
+通知的类型：
+
+前置通知 `<aop:before>` 指定增强的方法在切入点方法之前执行。
+
+后置通知 `<aop:after-returning> ` 指定增强的方法在切入点方法之后执行。
+
+环绕通知 `<aop:around>` 指定增强的方法在切入点方法之前和之后都执行。
+
+异常抛出通知 `<aop:throwing>` 指定增强的方法在出现异常时执行。
+
+最终通知 `<aop:after>`  无论是否有异常都会执行。
+
+![](img\image-20210810110909520.png)
+
+### 基于注解的AOP开发:
+
 ##### spring基于注解的AOP配置：最好使用环绕通知，不然可能调用顺序有误。
 
 代码位于`day03_05annotationAOP `  可以看到bean.xml中内容很少。
+
+基于注解的AOP开发，要使用@Aspect来标注切面类；一定要在配置文件中配置aop自动代理`<aop:aspectj-autoproxy/>`
 
 
 
@@ -276,7 +314,7 @@ spring的环绕通知:
 
 2.作业：
 
-###### 将account项目改为用spring基于xml的AOP的事物控制
+###### 将account项目改为用spring基于xml的AOP的事务控制
 
 代码位于`day04/02account_aoptx_xml`
 
@@ -345,6 +383,12 @@ spring中有JdbcDaoSupport类，用extends即可调用。但是这样的话就�
 
 再次提醒<property name="">中的name属性是set方法后面首字母变小写。
 
+
+
+
+
+
+
 #### 事务控制
 
 事务控制也是基于AOP的  所以需要导aspectjweaver。
@@ -359,6 +403,7 @@ spring基于纯注解：test.java中的@ContextConfiguration内容要改成class
 
 （因为把@ComponentScan写成了@Component导致找不到IAccountService类的bean对象....又找错找了半个小时！！！）
 
+<<<<<<< Updated upstream
 
 
 
@@ -581,5 +626,45 @@ rollbackForClassName  String[ ]
 
 
 
+=======
+### 声明式事务控制
+
+在配置文件中声明，用在Spring配置文件中声明式的处理事务来代替代码式的处理事务。
+
+在不需要事务管理的时候，只要在设定文件上修改一下，即可移去事务管理服务，无需改变代码重新编译，维护更方便。
+
+其底层原理就是AOP
+
+
+
+### SSM框架整合
+
+controller层
+
+service层
+
+dao层
+
+每一层各司其职
+
+整合MyBatis时，要将SqlSessionFactory配置到Spring容器中，在applicationcontext.xml中添加：
+
+```xml
+<bean id = "sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="dataSource" ref="dataSource"></property>
+</bean>
+```
+
+pom文件中要有mybatis-spring包。
+
+还要配置接口（也就是有sql语句的）所在位置:
+
+```xml
+<bean id = "mapperScanner" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+    <property name="basePackage" value="接口所在路径"></property>
+</bean>
+```
+
+>>>>>>> Stashed changes
 
 
