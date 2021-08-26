@@ -160,7 +160,7 @@ springmvc.xml只扫描controller，spring的配置文件排除扫描controller,�
 
 dao就是和数据库打交道的  所以MyBatis也是管理数据库相关的 
 
-dao里面的查询不需要提交事物  但是增删改一定要
+dao里面的查询不需要提交事务  但是增删改一定要
 
 ##### Spring整合MyBatis：
 

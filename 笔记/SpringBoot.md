@@ -1,3 +1,97 @@
+### SpringBoot 黑马 快速入门
+
+首先要知道SpringBoot是提供一种快速开发Spring项目的方式，而不是对Spring功能上的增强。
+
+Spring配置繁琐、依赖繁琐。
+
+SpringBoot可以自动配置，有辅助功能。
+
+引导类上面要有@SpringBootApplication注解。
+
+通过Spring Initializr建Spring Boot项目。
+
+
+
+如果properties、yml、yaml文件都存在，会优先加载properties文件。
+
+一般是使用yml配置文件：
+
+```yml
+server:
+    port: 8080
+```
+
+yml语法：
+
+数据值前面必须有空格。
+
+通过缩进表示层级关系。
+
+缩进的空格数目不重要，只要相同层级元素左侧对齐。
+
+##### 如何自定义数据呢？
+
+```xml
+name: abc  #普通键值对
+
+person:   #对象
+  name: xiaohong  #对象的属性
+  age: 20
+
+address:  #数组
+  - beijing
+  - shanghai
+```
+
+##### 如何获取这些定义的数据呢？
+
+在Controller里面，通过@Value("${}")来注入给变量。
+
+比如：
+
+```java
+@Value("${name}")
+private String name;
+
+@Value("${person.name}")
+private String name2;
+
+@Value("${person.age}")
+private int age;
+
+@Value("${address[1]}")
+private String addr;
+```
+
+如果觉得这样一个个注入很麻烦，可以使用Environment:
+
+```java
+@Autowired
+private Environment environment;
+
+System.out.println(environment.getProperty("person.name"));
+```
+
+还有一个最常用的方法：@ConfigurationProperties
+
+这个就是适合建一个javabean。
+
+
+
+##### 内部配置加载顺序：
+
+优先级从高到低：
+
+当前项目的config:/
+
+当前项目下
+
+classpath:/config/:
+
+classpath:/
+
+其实classpath就是在resources下扫描。
+
 #### 课程：尚硅谷SpringBoot顶尖教程  (雷丰阳)
 
 Spring全家桶：Spring Boot—>J2EE一站式解决方案
@@ -40,7 +134,7 @@ YAML：以数据为中心，比json、xml等更适合做配置文件
 
 ##### 1.@ConfigurationProperties和@Value
 
-@ConfigurationProperties(prefix = "")  是告诉SpringBoot将本类中的所有属性和配置文件中的相关配置进行绑定。prefix是要告诉说哪个下面的所有属性进行一一映射。  在这个注解前要加上@Component才能生效。
+@ConfigurationProperties(prefix = "")  是告诉SpringBoot将本类中的所有属性和配置文件中的相关配置进行绑定。prefix是要告诉说哪个下面的所有属性进行一一映射。  `在这个注解前要加上@Component才能生效`。
 
 @ConfigurationProperties支持松散绑定 就是last-name和lastName都对
 
@@ -80,11 +174,100 @@ person.dog.age = 3
 
 就是可能真正开发的时候，开发、生产、测试都不是同一个环境，要用不同端口。
 
-第一个方式：写多个Profile文件  使用spring-{名字}.properties    但是默认使用application.properties文件  想要激活某个profile：在application.properties中指定spring.profiles.active=dev/prod
+profile就是用来完成不同环境下，配置动态切换功能的。
 
-第二个方式：yml  在application.yml中用多个文档块定义不同属性  就不用写那么多个文件了
+第一个方式：写多个Profile文件  使用`spring-{名字}.properties    `但是默认使用application.properties文件  想要激活某个profile：在application.properties中指定spring.profiles.active=名字
+
+第二个方式：yml  在application.yml中用多个文档块定义不同属性  就不用写那么多个文件了。用---来分割不同文档块。
 
 第三个方式：命令行 --spring.profiles.active=dev   命令行优先级最高
+
+第四个方式：运行Jar包时指定。java -jar jar包所在目录  --spring.profiles.active=名字
+
+
+
+#### 整合MyBatis
+
+##### 注解的方式：
+
+```java
+mapper/DepartmentMapper.java:
+@Mapper  //一定要将接口扫描到容器中
+public interface DepartmentMapper {
+    @Select("select * from department where id=#{id}")
+    public Department getDeptById(Integer id);
+
+    @Delete("delete from department where id=#{id}")
+    public int deleteDeptById(Integer id);
+
+    @Insert("insert into department(departmentName) values(#{departmentName})")
+    public int insertDept(Department department);
+
+    @Update("update department set departmentName=#{departmentName} where id = #{id}")
+    public int updateDept(Department department);
+}
+```
+
+上面的数据库中变量名为departmentName，和Department类中定义的属性名一样。如果将数据库变量名改为department_name，就会获取不到数据库中的数据，此时要再写个config文件来开启驼峰命名法：
+
+```java
+@org.springframework.context.annotation.Configuration
+public class MyBatisConfig {
+    @Bean
+    public ConfigurationCustomizer configurationCustomizer(){
+        return new ConfigurationCustomizer(){
+            @Override
+            public void customize(Configuration configuration) {
+                configuration.setMapUnderscoreToCamelCase(true);
+            }
+        };
+    }
+}
+```
+
+当mapper接口比较多的时候，不用在每个接口上都写@Mapper，而是直接去扫描mapper所在的包：
+
+```java
+@MapperScan(value = "com.janice.springboot.mapper")
+@SpringBootApplication
+public class SpringBoot06DataMybatisApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(SpringBoot06DataMybatisApplication.class, args);
+    }
+}
+```
+
+##### 配置文件的方式：
+
+在application.yml中：
+
+```yml
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
+```
+
+```xml
+<!--mapper文件夹下的文件-->
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.janice.springboot.mapper.EmployeeMapper">
+    <select id="getEmpById" resultType="com.janice.springboot.bean.Employee">
+        select * from employee where id=#{id}
+    </select>
+    
+    <insert id="insertEmp">
+        insert into employee(lastName,email,gender,d_id) values (#{lastName},#{email},#{gender},#{dId})
+    </insert>
+</mapper>
+```
+
+感觉还是注解方便些。
+
+
 
 
 
@@ -521,87 +704,6 @@ spring:
       - classpath:department.sql
     initialization-mode: always
 ```
-
-#### 整合MyBatis
-
-##### 注解的方式：
-
-```java
-mapper/DepartmentMapper.java:
-@Mapper  //一定要将接口扫描到容器中
-public interface DepartmentMapper {
-    @Select("select * from department where id=#{id}")
-    public Department getDeptById(Integer id);
-
-    @Delete("delete from department where id=#{id}")
-    public int deleteDeptById(Integer id);
-
-    @Insert("insert into department(departmentName) values(#{departmentName})")
-    public int insertDept(Department department);
-
-    @Update("update department set departmentName=#{departmentName} where id = #{id}")
-    public int updateDept(Department department);
-}
-```
-
-上面的数据库中变量名为departmentName，和Department类中定义的属性名一样。如果将数据库变量名改为department_name，就会获取不到数据库中的数据，此时要再写个config文件来开启驼峰命名法：
-
-```java
-@org.springframework.context.annotation.Configuration
-public class MyBatisConfig {
-    @Bean
-    public ConfigurationCustomizer configurationCustomizer(){
-        return new ConfigurationCustomizer(){
-            @Override
-            public void customize(Configuration configuration) {
-                configuration.setMapUnderscoreToCamelCase(true);
-            }
-        };
-    }
-}
-```
-
-当mapper接口比较多的时候，不用在每个接口上都写@Mapper，而是直接去扫描mapper所在的包：
-
-```java
-@MapperScan(value = "com.janice.springboot.mapper")
-@SpringBootApplication
-public class SpringBoot06DataMybatisApplication {
-
-    public static void main(String[] args) {
-        SpringApplication.run(SpringBoot06DataMybatisApplication.class, args);
-    }
-}
-```
-
-##### 配置文件的方式：
-
-在application.yml中：
-
-```yml
-mybatis:
-  config-location: classpath:mybatis/mybatis-config.xml
-  mapper-locations: classpath:mybatis/mapper/*.xml
-```
-
-```xml
-<!--mapper文件夹下的文件-->
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper
-        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.janice.springboot.mapper.EmployeeMapper">
-    <select id="getEmpById" resultType="com.janice.springboot.bean.Employee">
-        select * from employee where id=#{id}
-    </select>
-    
-    <insert id="insertEmp">
-        insert into employee(lastName,email,gender,d_id) values (#{lastName},#{email},#{gender},#{dId})
-    </insert>
-</mapper>
-```
-
-感觉还是注解方便些。
 
 
 
