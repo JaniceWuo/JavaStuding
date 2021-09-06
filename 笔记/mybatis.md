@@ -115,6 +115,32 @@ PageHelper.startPage(起始页数，每页显示的条数)。
 
 用plugins标签配置插件。
 
+SpringBoot整合MyBatis并且使用pagehelper时，要导入依赖：
+
+```xml
+<dependency>
+    <groupId>com.github.pagehelper</groupId>
+    <artifactId>pagehelper-spring-boot-starter</artifactId>
+    <version>1.2.12</version>
+</dependency>
+```
+
+然后在yml文件中配置pagehelper的相关：
+
+```yml
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+```
+
+```java
+PageHelper.startPage(第几页, 每页展示几条);
+List<StuScore> stuScore = scoreMapper.getStuScore(stuNo);
+PageInfo<StuScore> pageInfo = new PageInfo<>(stuScore);
+```
+
 
 
 一个老师有多个学生，多个学生有同一个老师。
@@ -187,6 +213,38 @@ StudentMapper.xml 的配置如下：
 </resultMap>
 ```
 ###### 注意column是数据库表查出来的列名字，property是java类里面对应的属性名。是从column取值注入给property。
+
+
+
+javaBean的属性和sql表里面并不一定完全对应。
+
+比如score表里只有学生id，课程id，成绩；但是我们最后想获取某位学生全部课程的成绩时，需要展示出该学生名字以及课程的名字，这就需要联合查另外的两张表course和student表。所以score的javaBean中，我们要补充两个属性courseName和studentName，在mapper中写查找的sql语句时，要三表联合查询，并且要起别名。例如：
+
+```xml
+<resultMap type="com.wdd.studentmanager.domain.Score" id="ScoreInfo">
+    <result column="id" property="id"/>
+    <result column="course_id" property="courseId"/>
+    <result column="student_id" property="studentId"/>
+    <result column="score" property="score"/>
+    <result column="remark" property="remark"/>
+    <result column="courseName" property="courseName"/>
+    <result column="studentName" property="studentName"/>
+</resultMap>
+
+    <select id="getAll" parameterType="Score" resultMap="ScoreInfo">
+        select  s_score.*,s_course.name as courseName,s_student.username as studentName
+        from s_score,s_course,s_student
+        <where>
+            s_score.course_id = s_course.id and s_score.student_id = s_student.id
+            <if test="courseId!=null and courseId != ''"> and course_id = #{courseId} </if>
+            <if test="studentId!=null and studentId != ''"> and student_id = #{studentId} </if>
+        </where>
+    </select>
+```
+
+以上这种动态sql还挺有用的感觉，因为对于学生和老师，其实所展示的成绩内容的列名应该是一样的，只是学生只能查自己的成绩。那么就应该传入studentId。如果老师也只能查自己对应学科的成绩的话，就应该传入courseId。管理员不用传入任何参数，所展示的是全部学生全部课程的成绩。
+
+这种实现方法就是初始化一个Score=new Score()，如果判断当前登录人是学生（其实就是能否从session中取出不为空的student对象），那么score.setStudentId(student.getId())，这个student对象是登录的时候就存到sesion域了的。调用上面的sql时，就会传入studentId，也就只能返回该学生的成绩了。
 
 
 

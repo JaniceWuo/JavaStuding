@@ -10,7 +10,7 @@
 
 `git add . `将修改的文件添加进暂存区。
 
-`git pull `等价于fetch和merge两步。
+`git pull `等价于fetch和merge两步。如果你在开发的时候，别人已经有新的提交了，这时远程代码和当前文件夹下的代码就不一样了，所以要拉取。
 
 `git commit`
 
